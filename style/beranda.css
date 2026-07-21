@@ -1,0 +1,318 @@
+:root {
+  --primary: #003d9b;
+  --primary-dark: #002c6d;
+  --primary-darker: #041b3c;
+  --primary-tint: #c4d2ff;
+  --primary-light: #d7e2ff;
+  --primary-lighter: #e8edff;
+  --primary-lightest: #f1f3ff;
+  --secondary: #36b37e;
+  --secondary-dark: #00734c;
+  --secondary-light: #82f9be;
+  --tertiary: #ffab00;
+  --tertiary-alt: #ffb950;
+  --tertiary-light: #ffddb3;
+  --tertiary-dark: #291800;
+  --neutral-900: #172b4d;
+  --neutral-800: #434654;
+  --neutral-700: #737685;
+  --neutral-600: #6b7280;
+  --neutral-300: #c3c6d6;
+  --neutral-100: #f9f9ff;
+  --white: #ffffff;
+  --black: #000000;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: var(--neutral-900);
+}
+
+.icon {
+  width: 1rem;
+  height: 1rem;
+  vertical-align: -0.15rem;
+  fill: currentColor;
+  display: inline-block;
+}
+
+/* ===== NAVBAR ===== */
+.navbar-custom .nav-link {
+  color: var(--neutral-800);
+  font-weight: 500;
+}
+.navbar-custom .nav-link.active {
+  color: var(--primary);
+  font-weight: 600;
+  border-bottom: 2px solid var(--primary);
+}
+.navbar-brand:hover {
+  color: var(--primary) !important;
+}
+.brand-logo {
+  font-weight: 700;
+  color: var(--primary);
+  font-size: 1.3rem;
+}
+.btn-navy {
+  background-color: var(--primary);
+  color: var(--white);
+  border: none;
+}
+.btn-navy:hover {
+  background-color: var(--primary-dark);
+  color: var(--white);
+}
+.btn-outline-primary {
+  color: var(--primary);
+  border-color: var(--primary);
+}
+.btn-outline-primary:hover,
+.btn-outline-primary:focus,
+.btn-outline-primary:active {
+  background-color: var(--primary);
+  border-color: var(--primary);
+  color: var(--white);
+}
+
+/* ===== HERO ===== */
+.hero-section {
+  background: linear-gradient(
+    130deg,
+    var(--primary-lightest) 0%,
+    var(--white) 100%
+  );
+  padding-top: 70px;
+  padding-bottom: 70px;
+  position: relative;
+  overflow: hidden;
+}
+.hero-title {
+  font-weight: 800;
+  color: var(--primary-darker);
+  line-height: 1.2;
+}
+.hero-subtitle {
+  color: var(--text-muted);
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.search-card {
+  background: var(--white);
+  border-radius: 16px;
+  box-shadow: 0 10px 30px rgba(4, 27, 60, 0.08);
+  padding: 28px;
+}
+.search-label {
+  font-size: 0.85rem;
+  color: var(--neutral-800);
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--primary-tint);
+  box-shadow: 0 0 0 0.25rem rgba(0, 82, 204, 0.15);
+}
+.btn-search {
+  background-color: var(--primary);
+  border: none;
+  font-weight: 600;
+  white-space: nowrap;
+}
+.btn-search:hover {
+  background-color: var(--primary-dark);
+}
+
+.badge-popular {
+  background-color: var(--primary-lighter);
+  font-weight: 500;
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+}
+
+/* dekorasi kaca pembesar di kanan hero (isi ulang manual dengan svg/route) */
+.hero-deco {
+  position: absolute;
+  right: 0px;
+  bottom: 0px;
+  color: rgba(0, 82, 204, 0.07);
+  z-index: 0;
+  line-height: 1;
+}
+
+/* ===== GOR POPULER ===== */
+.populer-section {
+  background: var(--neutral-100);
+}
+.section-title {
+  font-weight: 700;
+  color: var(--navy);
+}
+.link-view-all {
+  color: var(--primary);
+  font-weight: 600;
+  text-decoration: none;
+}
+.link-view-all:hover {
+  color: var(--primary-dark);
+}
+
+.gor-card {
+  border: 1px solid var(--primary-lightest);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+}
+.gor-card:hover {
+  box-shadow: 0 8px 20px rgba(4, 27, 60, 0.1);
+}
+.gor-card img {
+  height: 220px;
+  object-fit: cover;
+  width: 100%;
+}
+.position-relative {
+  position: relative;
+}
+
+.rating-badge {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+
+  display: flex;
+  align-items: center;
+  gap: 4px;
+
+  background: var(--white);
+
+  padding: 6px 10px;
+  border-radius: 999px;
+
+  font-size: 0.85rem;
+  font-weight: 600;
+
+  z-index: 10;
+}
+
+.rating-badge img {
+  width: 14px;
+  height: 14px;
+}
+.gor-title {
+  font-weight: 700;
+  color: var(--navy);
+}
+.gor-location {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  img {
+    width: 14px;
+    height: 17px;
+  }
+}
+.gor-price-label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+.gor-price {
+  font-weight: 700;
+  color: var(--navy);
+  font-size: 1.1rem;
+}
+.btn-pesan {
+  background-color: var(--primary);
+  color: var(--white);
+  font-weight: 500;
+  font-size: 0.9rem;
+  border: none;
+}
+.btn-pesan:hover {
+  background-color: var(--navy);
+  color: var(--white);
+}
+
+/* ===== KENAPA PILIH ===== */
+.why-section {
+  background-color: var(--primary-lightest);
+}
+.why-card {
+  background: var(--white);
+  border-radius: 14px;
+  padding: 32px 24px;
+  height: 100%;
+  text-align: center;
+}
+.why-icon {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 20px;
+  font-size: 1.5rem;
+  color: var(--white);
+}
+.icon-blue {
+  background-color: var(--primary);
+}
+.icon-green {
+  background-color: var(--secondary);
+}
+.icon-orange {
+  background-color: var(--tertiary);
+}
+
+.why-title {
+  font-weight: 700;
+  color: var(--navy);
+}
+.why-text {
+  color: var(--text-muted);
+  font-size: 0.92rem;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: var(--primary-darker);
+  color: var(--primary-tint);
+}
+footer h6 {
+  color: var(--white);
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  font-size: 0.85rem;
+}
+footer a {
+  color: var(--primary-tint);
+  text-decoration: none;
+  font-size: 0.92rem;
+}
+footer a:hover {
+  color: var(--white);
+}
+.footer-brand {
+  color: var(--white);
+  font-weight: 700;
+}
+.footer-social {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: var(--primary-tint);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+}
+.footer-social:hover {
+  background: var(--primary);
+}
+.footer-bottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font-size: 0.85rem;
+}
