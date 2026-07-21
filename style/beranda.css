@@ -100,6 +100,7 @@ body {
 
 .search-card {
   background: var(--white);
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
   border-radius: 16px;
   box-shadow: 0 10px 30px rgba(4, 27, 60, 0.08);
   padding: 28px;
@@ -160,7 +161,7 @@ body {
 }
 
 .gor-card {
-  border: 1px solid var(--primary-lightest);
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
   border-radius: 14px;
   overflow: hidden;
   transition: box-shadow 0.2s ease;
@@ -240,14 +241,15 @@ body {
 }
 .why-card {
   background: var(--white);
+  border: var(--bs-border-width) var(--bs-border-style) var(--bs-border-color) !important;
   border-radius: 14px;
-  padding: 32px 24px;
+  padding: 70px 24px;
   height: 100%;
   text-align: center;
 }
 .why-icon {
-  width: 60px;
-  height: 60px;
+  width: 80px;
+  height: 80px;
   border-radius: 50%;
   display: flex;
   align-items: center;
