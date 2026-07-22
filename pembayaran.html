@@ -22,7 +22,7 @@
     <!-- Custom CSS untuk halaman pemesanan -->
     <style>
       :root {
-        --primary-navy: #003D9B;
+        --primary-navy: #003b95;
         --primary-navy-hover: #002d72;
         --bg-body: #f4f5f9;
         --text-main: #222222;
@@ -62,7 +62,6 @@
         align-items: center;
         gap: 10px;
         color: #a0a0a0;
-        transition: all 0.3s ease;
       }
       .step.active {
         color: var(--text-main);
@@ -80,7 +79,6 @@
         font-size: 1rem;
         font-weight: 500;
         line-height: 1; 
-        transition: all 0.3s ease;
       }
       .step.active .step-num {
         background-color: var(--primary-navy);
@@ -105,19 +103,32 @@
         background-color: var(--primary-navy);
         color: white;
         font-weight: 600;
-        transition: all 0.3s ease;
+        transition: background-color 0.2s ease;
       }
       .btn-navy:not(.disabled-look):hover { 
         background-color: var(--primary-navy-hover); 
         color: white; 
-        transform: translateY(-1px);
+        /* Animasi transform dicabut */
       }
       .btn-navy.disabled-look {
         background-color: #cccccc !important;
         color: #888888 !important;
         cursor: not-allowed;
-        transform: none !important;
         border: none !important;
+      }
+
+      /* Tombol Alternatif (Outline Primary) */
+      .btn-outline-navy {
+        border: 1.5px solid var(--primary-navy);
+        color: var(--primary-navy);
+        background-color: transparent;
+        font-weight: 600;
+        transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease;
+      }
+      .btn-outline-navy:hover {
+        background-color: rgba(0, 59, 149, 0.04);
+        color: var(--primary-navy-hover);
+        border-color: var(--primary-navy-hover);
       }
 
       .btn-back {
@@ -160,7 +171,6 @@
         font-size: 0.95rem;
         padding: 0.75rem 1.2rem;
         color: var(--text-main);
-        /* Transisi diubah spesifik border & box-shadow agar background-image icon SVG tidak ikut beranimasi */
         transition: border-color 0.2s ease, box-shadow 0.2s ease;
       }
       .form-control-custom::placeholder { color: #a9a9a9; }
@@ -170,7 +180,7 @@
         outline: none;
       }
 
-      /* Form Validation Styles dengan Icon Warning Static */
+      /* Form Validation Styles */
       .form-control-custom.is-invalid {
         border-color: var(--error-color) !important;
         background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") !important;
@@ -290,7 +300,6 @@
       .bank-item-btn.selected {
         border-width: 1.5px;
       }
-      /* Class untuk memberi warna merah khusus pada opsi bank */
       .bank-item-btn.is-invalid {
         border-color: var(--error-color) !important;
         background-color: rgba(220, 53, 69, 0.03);
@@ -331,13 +340,11 @@
     <nav class="navbar navbar-light bg-white navbar-custom border-bottom sticky-top">
       <div class="container d-flex justify-content-between align-items-center">
         
-        <!-- Brand Logo Kiri -->
         <a class="navbar-brand brand-logo d-flex align-items-center gap-2 mb-0" href="/beranda.html">
           <img src="/img/icon/Basketball.svg" alt="logo" />
           SportSpot
         </a>
 
-        <!-- Breadcrumb / Step Progress Kanan -->
         <div class="step-progress">
           <div class="step active">
             <span class="step-num">1</span> 
@@ -355,7 +362,6 @@
 
     <!-- ================= MAIN CONTENT ================= -->
     <div class="container py-5 mb-5">
-      <!-- Tombol Kembali -->
       <a href="cari_lapangan.html" class="btn-back mb-4">
         <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
           <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
@@ -367,7 +373,6 @@
         <!-- ================= KOLOM KIRI (Form & Pembayaran) ================= -->
         <div class="col-lg-8">
           
-          <!-- Data Pemesan -->
           <div class="card-custom mb-4">
             <h5 class="section-title">Data Pemesan</h5>
             <form id="pemesanForm">
@@ -391,7 +396,6 @@
             </form>
           </div>
 
-          <!-- Metode Pembayaran -->
           <div class="card-custom">
             <h5 class="section-title">Metode Pembayaran</h5>
             
@@ -501,7 +505,6 @@
           <div class="card-custom sticky-top" style="top: 100px;">
             <h5 class="section-title">Ringkasan Pesanan</h5>
             
-            <!-- Info Lapangan -->
             <div class="d-flex align-items-center mb-3">
               <img src="/img/gor.jpg" alt="Arena Sport Hall" class="summary-img me-3" onerror="this.src='https://via.placeholder.com/75'">
               <div>
@@ -515,7 +518,6 @@
 
             <div class="hr-dashed"></div>
 
-            <!-- Rincian Harga -->
             <div class="d-flex justify-content-between price-row">
               <span>Harga Sewa</span>
               <span class="price-value">Rp 120.000</span>
@@ -527,14 +529,39 @@
 
             <div class="hr-dashed"></div>
 
-            <!-- Total Bayar -->
             <div class="d-flex justify-content-between align-items-center mb-4">
               <span class="fw-bold text-main" style="font-size: 1.05rem;">Total Bayar</span>
               <span class="fw-bold text-navy" style="font-size: 1.25rem;">Rp 125.000</span>
             </div>
 
-            <!-- Tombol Pesan -->
             <button id="btnPesanSekarang" type="button" class="btn btn-navy disabled-look w-100 py-3 rounded-3 fs-6">Pesan Sekarang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ================= MODAL KONFIRMASI ================= -->
+    <div class="modal fade" id="confirmModal" tabindex="-1" aria-labelledby="confirmModalLabel" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content" style="border-radius: 16px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+          <div class="modal-header border-0 pb-0">
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body text-center pb-4 px-4">
+            <div class="mb-3 d-flex justify-content-center">
+              <div style="width: 64px; height: 64px; background-color: #f4f5f9; border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="var(--primary-navy)" class="bi bi-shield-check" viewBox="0 0 16 16">
+                  <path d="M5.338 1.59a59.23 59.23 0 0 0-5.128 2.028l-.19.084v.041c0 .87 0 2.215.15 3.513.149 1.28.435 2.652 1.05 3.966a10.08 10.08 0 0 0 4.195 4.09l.1.045.1-.045a10.08 10.08 0 0 0 4.194-4.09c.616-1.314.9-2.685 1.05-3.965.15-1.298.15-2.643.15-3.514v-.04l-.19-.084a59.23 59.23 0 0 0-5.128-2.028 11.2 11.2 0 0 0-1.896-.5 11.2 11.2 0 0 0-1.896.5z"/>
+                  <path d="M10.854 5.146a.5.5 0 0 1 0 .708l-3 3a.5.5 0 0 1-.708 0l-1.5-1.5a.5.5 0 1 1 .708-.708L7.5 7.793l2.646-2.647a.5.5 0 0 1 .708 0z"/>
+                </svg>
+              </div>
+            </div>
+            <h5 class="fw-bold mb-2">Konfirmasi Pembayaran</h5>
+            <p class="text-muted small mb-4">Apakah kamu yakin data pemesan dan metode pembayaran sudah sesuai? Setelah ini pesanan akan langsung diproses dan tidak dapat diubah.</p>
+            <div class="d-flex flex-column gap-3">
+              <button type="button" class="btn btn-navy py-3 rounded-3 fw-semibold fs-6" id="btnConfirmPay">Ya, Lanjutkan Pembayaran</button>
+              <button type="button" class="btn btn-outline-navy py-3 rounded-3 fw-semibold fs-6" data-bs-dismiss="modal">Periksa Kembali</button>
+            </div>
           </div>
         </div>
       </div>
@@ -555,7 +582,6 @@
         return re.test(String(email).toLowerCase());
       }
 
-      // Cek apakah seluruh form terisi dengan benar (Update visual tombol aja)
       function checkFormValidity() {
         let isDataValid = true;
         requiredInputs.forEach(input => {
@@ -592,9 +618,7 @@
         }
       }
 
-      // Tampilkan error secara visual (Merahin spesifik di field / bank)
       function showErrors() {
-        // 1. Validasi Input Data Pemesan
         requiredInputs.forEach(input => {
           const val = input.value.trim();
           const feedbackEl = input.nextElementSibling; 
@@ -614,10 +638,7 @@
           }
         });
 
-        // 2. Validasi Metode Pembayaran
         const activeMethod = document.querySelector('.payment-row-card.active');
-        
-        // Bersihkan state error metode pembayaran dulu
         document.querySelectorAll('.bank-item-btn').forEach(b => b.classList.remove('is-invalid'));
         if(vaErrorMsg) vaErrorMsg.style.display = 'none';
 
@@ -627,7 +648,6 @@
             if (methodText === "Virtual Account") {
                 const selectedBank = activeMethod.querySelector('.bank-item-btn.selected');
                 if (!selectedBank) {
-                    // Kasih border merah langsung ke tombol-tombol banknya
                     activeMethod.querySelectorAll('.bank-item-btn').forEach(b => b.classList.add('is-invalid'));
                     if(vaErrorMsg) vaErrorMsg.style.display = 'block';
                 }
@@ -644,7 +664,6 @@
         }
       }
 
-      // Event Listener saat mengetik Data Pemesan
       requiredInputs.forEach(input => {
         input.addEventListener('input', () => {
            checkFormValidity();
@@ -652,7 +671,6 @@
         });
       });
 
-      // Event Listener untuk Input Kartu Kredit
       ccInputs.forEach(cc => {
         cc.addEventListener('input', () => {
             checkFormValidity();
@@ -668,14 +686,19 @@
           const isValid = checkFormValidity();
           
           if (!isValid) {
-              showErrors(); // Hanya menyalakan merah-merah, tanpa nge-pop alert
+              showErrors(); 
           } else {
-              // Jika sukses
-              window.location.href = 'pesanan_selesai.html'; 
+              // Jika valid, munculkan overlay popout konfirmasi
+              const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+              confirmModal.show();
           }
       });
 
-      // ================= ACCORDION METHOD =================
+      // Event Klik Tombol "Ya, Lanjutkan Pembayaran" di dalam overlay popout
+      document.getElementById('btnConfirmPay').addEventListener('click', function() {
+          window.location.href = 'konfirmasi.html'; 
+      });
+
       function toggleAccordion(cardElement) {
         const allCards = document.querySelectorAll('.payment-row-card');
         
@@ -705,7 +728,6 @@
         
         bankBtn.classList.add('selected');
         
-        // Hapus border merah dari semua bank pas ada yang dipilih
         allBanks.forEach(btn => btn.classList.remove('is-invalid'));
         if(vaErrorMsg) vaErrorMsg.style.display = 'none';
 
@@ -713,7 +735,6 @@
         if (isSubmitAttempted) showErrors();
       }
 
-      // Buka VA by default
       window.onload = function() {
         const activeCard = document.querySelector('.payment-row-card.active');
         if(activeCard) {
