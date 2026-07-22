@@ -76,7 +76,8 @@
           <div class="row g-3 align-items-end text-start">
             <div class="col-md-3">
               <div class="search-label">Jenis Olahraga</div>
-              <select class="form-select">
+              <select id="heroOlahraga" class="form-select">
+                <option>Semua</option>
                 <option>Badminton</option>
                 <option>Basket</option>
                 <option>Futsal</option>
@@ -86,6 +87,7 @@
             <div class="col-md-3">
               <div class="search-label">Tanggal</div>
               <input
+                id="heroTanggal"
                 type="text"
                 class="form-control"
                 placeholder="mm/dd/yyyy"
@@ -93,19 +95,19 @@
             </div>
             <div class="col-md-3">
               <div class="search-label">Lokasi</div>
-              <div class="input-group">
-                <span class="input-group-text bg-white">
-                  <img src="/img/icon/Icon.svg" alt="lokasi" />
-                </span>
-                <input
-                  type="text"
-                  class="form-control"
-                  placeholder="Cari kota atau area"
-                />
-              </div>
+              <select id="heroLokasi" class="form-select">
+                <option value="">Semua Lokasi</option>
+                <option value="Jakarta Barat">Jakarta Barat</option>
+                <option value="Bekasi">Bekasi</option>
+                <option value="Tangerang">Tangerang</option>
+                <option value="Salatiga">Salatiga</option>
+              </select>
             </div>
             <div class="col-md-3">
-              <button class="btn btn-search btn-primary w-100 py-2">
+              <button
+                id="heroSearchBtn"
+                class="btn btn-search btn-primary w-100 py-2"
+              >
                 <img src="/img/icon/magnifier.svg" alt="kaca pembesar" />
                 Cari Sekarang
               </button>
@@ -118,10 +120,20 @@
           class="mt-4 d-flex justify-content-center align-items-center flex-wrap gap-2"
         >
           <span class="text-muted me-2">Populer:</span>
-          <span class="badge-popular">Badminton</span>
-          <span class="badge-popular">Basket</span>
-          <span class="badge-popular">Futsal</span>
-          <span class="badge-popular">Tenis</span>
+          <span
+            class="badge-popular badge-populer-item"
+            data-olahraga="Badminton"
+            >Badminton</span
+          >
+          <span class="badge-popular badge-populer-item" data-olahraga="Basket"
+            >Basket</span
+          >
+          <span class="badge-popular badge-populer-item" data-olahraga="Futsal"
+            >Futsal</span
+          >
+          <span class="badge-popular badge-populer-item" data-olahraga="Tenis"
+            >Tenis</span
+          >
         </div>
       </div>
     </section>
@@ -309,7 +321,10 @@
       <div class="container">
         <div class="d-flex flex-row justify-content-between g-4 pb-4">
           <div class="col-md-4">
-            <a href="/index.html" class="footer-brand mb-3 fs-5 text-decoration-none d-inline-flex align-items-center gap-2">
+            <a
+              href="/index.html"
+              class="footer-brand mb-3 fs-5 text-decoration-none d-inline-flex align-items-center gap-2"
+            >
               <img src="img/icon/Basketball-putih.svg" alt="logo" />
               SportSpot
             </a>
@@ -375,5 +390,41 @@
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+      (function () {
+        var olahragaSelect = document.getElementById("heroOlahraga");
+        var tanggalInput = document.getElementById("heroTanggal");
+        var lokasiInput = document.getElementById("heroLokasi");
+        var searchBtn = document.getElementById("heroSearchBtn");
+
+        function goToCariLapangan() {
+          var params = new URLSearchParams();
+          if (olahragaSelect.value)
+            params.set("olahraga", olahragaSelect.value);
+          if (tanggalInput.value.trim())
+            params.set("tanggal", tanggalInput.value.trim());
+          if (lokasiInput.value.trim())
+            params.set("lokasi", lokasiInput.value.trim());
+          window.location.href = "/cari_lapangan.html?" + params.toString();
+        }
+
+        searchBtn.addEventListener("click", function (e) {
+          e.preventDefault();
+          goToCariLapangan();
+        });
+
+        // badge populer -> langsung isi olahraga & redirect
+        document
+          .querySelectorAll(".badge-populer-item")
+          .forEach(function (badge) {
+            badge.style.cursor = "pointer";
+            badge.addEventListener("click", function () {
+              olahragaSelect.value = badge.dataset.olahraga;
+              goToCariLapangan();
+            });
+          });
+      })();
+    </script>
   </body>
 </html>

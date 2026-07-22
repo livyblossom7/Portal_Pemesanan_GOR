@@ -63,7 +63,10 @@
       <div class="container">
         <!-- search bar (reuse .search-card dari beranda.css, max-width via class .search-wrap, bukan inline style) -->
         <div class="search-wrap mx-auto mb-5">
-          <label for="searchInput" class="search-caption d-block mb-2 fw-semibold small">
+          <label
+            for="searchInput"
+            class="search-caption d-block mb-2 fw-semibold small"
+          >
             Cari Lapangan GOR
           </label>
           <div class="search-card">
@@ -82,7 +85,14 @@
                 </div>
               </div>
               <div class="col-auto">
-                <button id="searchBtn" type="button" class="btn btn-navy btn-search" aria-label="Cari lapangan">Cari</button>
+                <button
+                  id="searchBtn"
+                  type="button"
+                  class="btn btn-navy btn-search"
+                  aria-label="Cari lapangan"
+                >
+                  Cari
+                </button>
               </div>
             </div>
           </div>
@@ -93,9 +103,14 @@
           <div class="col-lg-3">
             <div class="card border rounded-4 shadow-sm">
               <div class="card-body p-4">
-                <div class="d-flex justify-content-between align-items-center mb-3">
+                <div
+                  class="d-flex justify-content-between align-items-center mb-3"
+                >
                   <h2 class="filter-title h6 mb-0">Filter</h2>
-                  <button id="filterReset" class="btn btn-link btn-sm p-0 fw-semibold text-decoration-none filter-reset">
+                  <button
+                    id="filterReset"
+                    class="btn btn-link btn-sm p-0 fw-semibold text-decoration-none filter-reset"
+                  >
                     Reset
                   </button>
                 </div>
@@ -132,48 +147,113 @@
 
                 <!-- JENIS OLAHRAGA -->
                 <div class="mb-3">
-                  <h3 class="fw-bold small filter-section-title mb-3">Jenis Olahraga</h3>
+                  <h3 class="fw-bold small filter-section-title mb-3">
+                    Jenis Olahraga
+                  </h3>
                   <div class="row row-cols-2 g-2">
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-olahraga" type="checkbox" value="Badminton" id="olahraga-badminton" />
-                        <label class="form-check-label small" for="olahraga-badminton">Badminton</label>
+                        <input
+                          class="form-check-input filter-olahraga"
+                          type="checkbox"
+                          value="Badminton"
+                          id="olahraga-badminton"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="olahraga-badminton"
+                          >Badminton</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-olahraga" type="checkbox" value="Futsal" id="olahraga-futsal" />
-                        <label class="form-check-label small" for="olahraga-futsal">Futsal</label>
+                        <input
+                          class="form-check-input filter-olahraga"
+                          type="checkbox"
+                          value="Futsal"
+                          id="olahraga-futsal"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="olahraga-futsal"
+                          >Futsal</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-olahraga" type="checkbox" value="Basket" id="olahraga-basket" />
-                        <label class="form-check-label small" for="olahraga-basket">Basket</label>
+                        <input
+                          class="form-check-input filter-olahraga"
+                          type="checkbox"
+                          value="Basket"
+                          id="olahraga-basket"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="olahraga-basket"
+                          >Basket</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-olahraga" type="checkbox" value="Tenis" id="olahraga-tenis" />
-                        <label class="form-check-label small" for="olahraga-tenis">Tenis</label>
+                        <input
+                          class="form-check-input filter-olahraga"
+                          type="checkbox"
+                          value="Tenis"
+                          id="olahraga-tenis"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="olahraga-tenis"
+                          >Tenis</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-olahraga" type="checkbox" value="Voli" id="olahraga-voli" />
-                        <label class="form-check-label small" for="olahraga-voli">Voli</label>
+                        <input
+                          class="form-check-input filter-olahraga"
+                          type="checkbox"
+                          value="Voli"
+                          id="olahraga-voli"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="olahraga-voli"
+                          >Voli</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-olahraga" type="checkbox" value="Tenis Meja" id="olahraga-tenismeja" />
-                        <label class="form-check-label small" for="olahraga-tenismeja">Tenis Meja</label>
+                        <input
+                          class="form-check-input filter-olahraga"
+                          type="checkbox"
+                          value="Tenis Meja"
+                          id="olahraga-tenismeja"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="olahraga-tenismeja"
+                          >Tenis Meja</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-olahraga" type="checkbox" value="Lari" id="olahraga-lari" />
-                        <label class="form-check-label small" for="olahraga-lari">Lari</label>
+                        <input
+                          class="form-check-input filter-olahraga"
+                          type="checkbox"
+                          value="Lari"
+                          id="olahraga-lari"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="olahraga-lari"
+                          >Lari</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -183,27 +263,90 @@
 
                 <!-- RENTANG HARGA (single-select, sama kayak Rating) -->
                 <div class="mb-3">
-                  <h3 class="fw-bold small filter-section-title mb-3">Rentang Harga</h3>
+                  <h3 class="fw-bold small filter-section-title mb-3">
+                    Rentang Harga
+                  </h3>
                   <div class="row row-cols-2 g-2">
                     <div class="col">
-                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-semua" data-min="0" data-max="999999999" autocomplete="off" checked />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-semua">Semua Harga</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-harga"
+                        name="harga"
+                        id="harga-semua"
+                        data-min="0"
+                        data-max="999999999"
+                        autocomplete="off"
+                        checked
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="harga-semua"
+                        >Semua Harga</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-50" data-min="0" data-max="49999" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-50">&lt; Rp 50rb</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-harga"
+                        name="harga"
+                        id="harga-50"
+                        data-min="0"
+                        data-max="49999"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="harga-50"
+                        >&lt; Rp 50rb</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-50-100" data-min="50000" data-max="99999" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-50-100">Rp 50rb - 100rb</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-harga"
+                        name="harga"
+                        id="harga-50-100"
+                        data-min="50000"
+                        data-max="99999"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="harga-50-100"
+                        >Rp 50rb - 100rb</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-100-200" data-min="100000" data-max="199999" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-100-200">Rp 100rb - 200rb</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-harga"
+                        name="harga"
+                        id="harga-100-200"
+                        data-min="100000"
+                        data-max="199999"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="harga-100-200"
+                        >Rp 100rb - 200rb</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-200" data-min="200000" data-max="999999999" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-200">&gt; Rp 200rb</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-harga"
+                        name="harga"
+                        id="harga-200"
+                        data-min="200000"
+                        data-max="999999999"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="harga-200"
+                        >&gt; Rp 200rb</label
+                      >
                     </div>
                   </div>
                 </div>
@@ -212,27 +355,90 @@
 
                 <!-- RATING (single-select, format rentang) -->
                 <div class="mb-3">
-                  <h3 class="fw-bold small filter-section-title mb-3">Rating</h3>
+                  <h3 class="fw-bold small filter-section-title mb-3">
+                    Rating
+                  </h3>
                   <div class="row row-cols-2 g-2">
                     <div class="col">
-                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-semua" data-min="0" data-max="5" autocomplete="off" checked />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-semua">Semua Rating</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-rating"
+                        name="rating"
+                        id="rating-semua"
+                        data-min="0"
+                        data-max="5"
+                        autocomplete="off"
+                        checked
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="rating-semua"
+                        >Semua Rating</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-45" data-min="4.5" data-max="5" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-45">4.5 - 5.0 &#9733;</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-rating"
+                        name="rating"
+                        id="rating-45"
+                        data-min="4.5"
+                        data-max="5"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="rating-45"
+                        >4.5 - 5.0 &#9733;</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-40" data-min="4.0" data-max="4.49" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-40">4.0 - 4.5 &#9733;</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-rating"
+                        name="rating"
+                        id="rating-40"
+                        data-min="4.0"
+                        data-max="4.49"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="rating-40"
+                        >4.0 - 4.5 &#9733;</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-35" data-min="3.5" data-max="3.99" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-35">3.5 - 4.0 &#9733;</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-rating"
+                        name="rating"
+                        id="rating-35"
+                        data-min="3.5"
+                        data-max="3.99"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="rating-35"
+                        >3.5 - 4.0 &#9733;</label
+                      >
                     </div>
                     <div class="col">
-                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-30" data-min="3.0" data-max="3.49" autocomplete="off" />
-                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-30">3.0 - 3.5 &#9733;</label>
+                      <input
+                        type="radio"
+                        class="btn-check filter-rating"
+                        name="rating"
+                        id="rating-30"
+                        data-min="3.0"
+                        data-max="3.49"
+                        autocomplete="off"
+                      />
+                      <label
+                        class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn"
+                        for="rating-30"
+                        >3.0 - 3.5 &#9733;</label
+                      >
                     </div>
                   </div>
                 </div>
@@ -241,48 +447,111 @@
 
                 <!-- FASILITAS (multi-select, AND: lapangan harus punya semua yang dicentang) -->
                 <div>
-                  <h3 class="fw-bold small filter-section-title mb-3">Fasilitas</h3>
+                  <h3 class="fw-bold small filter-section-title mb-3">
+                    Fasilitas
+                  </h3>
                   <div class="row row-cols-2 g-2">
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-fasilitas" type="checkbox" value="parkir" id="fasilitas-parkir" />
-                        <label class="form-check-label small" for="fasilitas-parkir">Parkir Luas</label>
+                        <input
+                          class="form-check-input filter-fasilitas"
+                          type="checkbox"
+                          value="parkir"
+                          id="fasilitas-parkir"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="fasilitas-parkir"
+                          >Parkir Luas</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-fasilitas" type="checkbox" value="kantin" id="fasilitas-kantin" />
-                        <label class="form-check-label small" for="fasilitas-kantin">Kantin</label>
+                        <input
+                          class="form-check-input filter-fasilitas"
+                          type="checkbox"
+                          value="kantin"
+                          id="fasilitas-kantin"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="fasilitas-kantin"
+                          >Kantin</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-fasilitas" type="checkbox" value="ruang-ganti" id="fasilitas-ruangganti" />
-                        <label class="form-check-label small" for="fasilitas-ruangganti">Ruang Ganti</label>
+                        <input
+                          class="form-check-input filter-fasilitas"
+                          type="checkbox"
+                          value="ruang-ganti"
+                          id="fasilitas-ruangganti"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="fasilitas-ruangganti"
+                          >Ruang Ganti</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-fasilitas" type="checkbox" value="wifi" id="fasilitas-wifi" />
-                        <label class="form-check-label small" for="fasilitas-wifi">Wi-Fi</label>
+                        <input
+                          class="form-check-input filter-fasilitas"
+                          type="checkbox"
+                          value="wifi"
+                          id="fasilitas-wifi"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="fasilitas-wifi"
+                          >Wi-Fi</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-fasilitas" type="checkbox" value="mushola" id="fasilitas-mushola" />
-                        <label class="form-check-label small" for="fasilitas-mushola">Mushola</label>
+                        <input
+                          class="form-check-input filter-fasilitas"
+                          type="checkbox"
+                          value="mushola"
+                          id="fasilitas-mushola"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="fasilitas-mushola"
+                          >Mushola</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-fasilitas" type="checkbox" value="ac" id="fasilitas-ac" />
-                        <label class="form-check-label small" for="fasilitas-ac">AC</label>
+                        <input
+                          class="form-check-input filter-fasilitas"
+                          type="checkbox"
+                          value="ac"
+                          id="fasilitas-ac"
+                        />
+                        <label class="form-check-label small" for="fasilitas-ac"
+                          >AC</label
+                        >
                       </div>
                     </div>
                     <div class="col">
                       <div class="form-check">
-                        <input class="form-check-input filter-fasilitas" type="checkbox" value="toilet" id="fasilitas-toilet" />
-                        <label class="form-check-label small" for="fasilitas-toilet">Toilet</label>
+                        <input
+                          class="form-check-input filter-fasilitas"
+                          type="checkbox"
+                          value="toilet"
+                          id="fasilitas-toilet"
+                        />
+                        <label
+                          class="form-check-label small"
+                          for="fasilitas-toilet"
+                          >Toilet</label
+                        >
                       </div>
                     </div>
                   </div>
@@ -322,23 +591,32 @@
             </div>
 
             <!-- ================= NO RESULTS (Bootstrap Alert - komponen Umpan Balik) ================= -->
-            <div id="noResults" class="alert alert-light border text-center d-none" role="alert">
-              Tidak ada lapangan yang cocok dengan filter kamu. Coba ubah kriteria pencarian.
+            <div
+              id="noResults"
+              class="alert alert-light border text-center d-none"
+              role="alert"
+            >
+              Tidak ada lapangan yang cocok dengan filter kamu. Coba ubah
+              kriteria pencarian.
             </div>
 
             <div id="resultsGrid" class="row g-4">
               <!-- card 1 -->
-              <div class="col-md-6 gor-card-item"
+              <div
+                class="col-md-6 gor-card-item"
                 data-nama="GOR Kebon Jeruk"
                 data-kota="Jakarta Barat"
                 data-olahraga="Badminton"
                 data-harga="75000"
                 data-rating="4.8"
                 data-fasilitas="parkir,kantin,wifi"
-                data-popularitas="1">
+                data-popularitas="1"
+              >
                 <div class="gor-card h-100 d-flex flex-column">
                   <div class="position-relative">
-                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                    <span
+                      class="badge rounded-pill bg-white text-dark border rating-badge"
+                    >
                       <img src="/img/icon/star.svg" alt="bintang" />
                       4.8
                     </span>
@@ -351,7 +629,9 @@
                       Jakarta Barat, DKI Jakarta
                     </p>
                     <hr />
-                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-auto"
+                    >
                       <div>
                         <div class="gor-price-label">Mulai</div>
                         <div class="gor-price">
@@ -359,7 +639,9 @@
                         </div>
                       </div>
                       <a href="/detail_gor.html">
-                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                        <button class="btn btn-pesan px-3 py-2">
+                          Pesan Sekarang
+                        </button>
                       </a>
                     </div>
                   </div>
@@ -367,17 +649,21 @@
               </div>
 
               <!-- card 2 -->
-              <div class="col-md-6 gor-card-item"
+              <div
+                class="col-md-6 gor-card-item"
                 data-nama="Champions Futsal"
                 data-kota="Bekasi"
                 data-olahraga="Futsal"
                 data-harga="65000"
                 data-rating="4.7"
                 data-fasilitas="parkir,kantin,toilet"
-                data-popularitas="2">
+                data-popularitas="2"
+              >
                 <div class="gor-card h-100 d-flex flex-column">
                   <div class="position-relative">
-                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                    <span
+                      class="badge rounded-pill bg-white text-dark border rating-badge"
+                    >
                       <img src="/img/icon/star.svg" alt="bintang" />
                       4.7
                     </span>
@@ -390,7 +676,9 @@
                       Bekasi Selatan, Bekasi
                     </p>
                     <hr />
-                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-auto"
+                    >
                       <div>
                         <div class="gor-price-label">Mulai</div>
                         <div class="gor-price">
@@ -398,7 +686,9 @@
                         </div>
                       </div>
                       <a href="/detail_gor.html">
-                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                        <button class="btn btn-pesan px-3 py-2">
+                          Pesan Sekarang
+                        </button>
                       </a>
                     </div>
                   </div>
@@ -406,17 +696,21 @@
               </div>
 
               <!-- card 3 -->
-              <div class="col-md-6 gor-card-item"
+              <div
+                class="col-md-6 gor-card-item"
                 data-nama="Arena Sport Hall"
                 data-kota="Tangerang"
                 data-olahraga="Basket"
                 data-harga="120000"
                 data-rating="4.9"
                 data-fasilitas="parkir,ruang-ganti,ac"
-                data-popularitas="3">
+                data-popularitas="3"
+              >
                 <div class="gor-card h-100 d-flex flex-column">
                   <div class="position-relative">
-                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                    <span
+                      class="badge rounded-pill bg-white text-dark border rating-badge"
+                    >
                       <img src="/img/icon/star.svg" alt="bintang" />
                       4.9
                     </span>
@@ -429,7 +723,9 @@
                       Gading Serpong, Tangerang
                     </p>
                     <hr />
-                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-auto"
+                    >
                       <div>
                         <div class="gor-price-label">Mulai</div>
                         <div class="gor-price">
@@ -437,7 +733,9 @@
                         </div>
                       </div>
                       <a href="/detail_gor.html">
-                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                        <button class="btn btn-pesan px-3 py-2">
+                          Pesan Sekarang
+                        </button>
                       </a>
                     </div>
                   </div>
@@ -445,17 +743,21 @@
               </div>
 
               <!-- card 4 -->
-              <div class="col-md-6 gor-card-item"
+              <div
+                class="col-md-6 gor-card-item"
                 data-nama="Tennis Indoor Kridanggo"
                 data-kota="Salatiga"
                 data-olahraga="Tenis"
                 data-harga="80000"
                 data-rating="4.5"
                 data-fasilitas="parkir,wifi,toilet"
-                data-popularitas="4">
+                data-popularitas="4"
+              >
                 <div class="gor-card h-100 d-flex flex-column">
                   <div class="position-relative">
-                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                    <span
+                      class="badge rounded-pill bg-white text-dark border rating-badge"
+                    >
                       <img src="/img/icon/star.svg" alt="bintang" />
                       4.5
                     </span>
@@ -468,7 +770,9 @@
                       Sidomukti, Salatiga
                     </p>
                     <hr />
-                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                    <div
+                      class="d-flex justify-content-between align-items-center mt-auto"
+                    >
                       <div>
                         <div class="gor-price-label">Mulai</div>
                         <div class="gor-price">
@@ -476,7 +780,9 @@
                         </div>
                       </div>
                       <a href="/detail_gor.html">
-                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                        <button class="btn btn-pesan px-3 py-2">
+                          Pesan Sekarang
+                        </button>
                       </a>
                     </div>
                   </div>
@@ -508,7 +814,10 @@
       <div class="container">
         <div class="d-flex flex-row justify-content-between g-4 pb-4">
           <div class="col-md-4">
-            <a href="/index.html" class="footer-brand mb-3 fs-5 text-decoration-none d-inline-flex align-items-center gap-2">
+            <a
+              href="/index.html"
+              class="footer-brand mb-3 fs-5 text-decoration-none d-inline-flex align-items-center gap-2"
+            >
               <img src="img/icon/Basketball-putih.svg" alt="logo" />
               SportSpot
             </a>
@@ -594,41 +903,54 @@
         var resetBtn = document.getElementById('filterReset');
 
         function cards() {
-          return Array.prototype.slice.call(grid.querySelectorAll('.gor-card-item'));
+          return Array.prototype.slice.call(
+            grid.querySelectorAll(".gor-card-item"),
+          );
         }
 
         function checkedValues(selector) {
           return Array.prototype.slice
             .call(document.querySelectorAll(selector))
-            .map(function (el) { return el.value; });
+            .map(function (el) {
+              return el.value;
+            });
         }
 
         function checkedRangeEls(selector) {
-          return Array.prototype.slice.call(document.querySelectorAll(selector));
+          return Array.prototype.slice.call(
+            document.querySelectorAll(selector),
+          );
         }
 
         function matchesFilters(card) {
-          var nama = (card.dataset.nama || '').toLowerCase();
-          var kota = card.dataset.kota || '';
-          var olahraga = card.dataset.olahraga || '';
+          var nama = (card.dataset.nama || "").toLowerCase();
+          var kota = card.dataset.kota || "";
+          var olahraga = card.dataset.olahraga || "";
           var harga = parseInt(card.dataset.harga, 10) || 0;
           var rating = parseFloat(card.dataset.rating) || 0;
-          var fasilitasList = (card.dataset.fasilitas || '')
-            .split(',')
-            .map(function (f) { return f.trim(); })
+          var fasilitasList = (card.dataset.fasilitas || "")
+            .split(",")
+            .map(function (f) {
+              return f.trim();
+            })
             .filter(Boolean);
 
           var q = searchInput.value.trim().toLowerCase();
-          if (q && nama.indexOf(q) === -1 && kota.toLowerCase().indexOf(q) === -1) {
+          if (
+            q &&
+            nama.indexOf(q) === -1 &&
+            kota.toLowerCase().indexOf(q) === -1
+          ) {
             return false;
           }
 
           if (kotaValue !== 'Semua Kota' && kotaValue !== kota) return false;
 
-          var sports = checkedValues('.filter-olahraga:checked');
-          if (sports.length > 0 && sports.indexOf(olahraga) === -1) return false;
+          var sports = checkedValues(".filter-olahraga:checked");
+          if (sports.length > 0 && sports.indexOf(olahraga) === -1)
+            return false;
 
-          var priceEls = checkedRangeEls('.filter-harga:checked');
+          var priceEls = checkedRangeEls(".filter-harga:checked");
           if (priceEls.length > 0) {
             var inRange = priceEls.some(function (el) {
               var min = parseInt(el.dataset.min, 10);
@@ -638,14 +960,14 @@
             if (!inRange) return false;
           }
 
-          var ratingEl = document.querySelector('.filter-rating:checked');
+          var ratingEl = document.querySelector(".filter-rating:checked");
           if (ratingEl) {
             var rmin = parseFloat(ratingEl.dataset.min);
             var rmax = parseFloat(ratingEl.dataset.max);
             if (rating < rmin || rating > rmax) return false;
           }
 
-          var facilities = checkedValues('.filter-fasilitas:checked');
+          var facilities = checkedValues(".filter-fasilitas:checked");
           if (facilities.length > 0) {
             var hasAll = facilities.every(function (f) {
               return fasilitasList.indexOf(f) !== -1;
@@ -660,17 +982,17 @@
           var visibleCount = 0;
           cards().forEach(function (card) {
             var show = matchesFilters(card);
-            card.classList.toggle('d-none', !show);
+            card.classList.toggle("d-none", !show);
             if (show) visibleCount++;
           });
 
           if (visibleCount === 0) {
-            resultsCount.textContent = 'Tidak ada lapangan ditemukan';
-            noResults.classList.remove('d-none');
+            resultsCount.textContent = "Tidak ada lapangan ditemukan";
+            noResults.classList.remove("d-none");
           } else {
             resultsCount.textContent =
-              'Menampilkan ' + visibleCount + ' Lapangan ditemukan';
-            noResults.classList.add('d-none');
+              "Menampilkan " + visibleCount + " Lapangan ditemukan";
+            noResults.classList.add("d-none");
           }
         }
 
@@ -678,23 +1000,34 @@
           var mode = sortValue;
           var items = cards();
           items.sort(function (a, b) {
-            if (mode === 'Harga Terendah') {
-              return parseInt(a.dataset.harga, 10) - parseInt(b.dataset.harga, 10);
+            if (mode === "Harga Terendah") {
+              return (
+                parseInt(a.dataset.harga, 10) - parseInt(b.dataset.harga, 10)
+              );
             }
-            if (mode === 'Harga Tertinggi') {
-              return parseInt(b.dataset.harga, 10) - parseInt(a.dataset.harga, 10);
+            if (mode === "Harga Tertinggi") {
+              return (
+                parseInt(b.dataset.harga, 10) - parseInt(a.dataset.harga, 10)
+              );
             }
-            if (mode === 'Rating Tertinggi') {
-              return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+            if (mode === "Rating Tertinggi") {
+              return (
+                parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating)
+              );
             }
-            return parseInt(a.dataset.popularitas, 10) - parseInt(b.dataset.popularitas, 10);
+            return (
+              parseInt(a.dataset.popularitas, 10) -
+              parseInt(b.dataset.popularitas, 10)
+            );
           });
-          items.forEach(function (item) { grid.appendChild(item); });
+          items.forEach(function (item) {
+            grid.appendChild(item);
+          });
         }
 
-        searchBtn.addEventListener('click', applyFilters);
-        searchInput.addEventListener('keydown', function (e) {
-          if (e.key === 'Enter') {
+        searchBtn.addEventListener("click", applyFilters);
+        searchInput.addEventListener("keydown", function (e) {
+          if (e.key === "Enter") {
             e.preventDefault();
             applyFilters();
           }
@@ -724,7 +1057,7 @@
           });
         });
 
-        resetBtn.addEventListener('click', function (e) {
+        resetBtn.addEventListener("click", function (e) {
           e.preventDefault();
           searchInput.value = '';
           kotaValue = 'Semua Kota';
@@ -744,6 +1077,32 @@
           applyFilters();
         });
 
+        function applyParamsFromURL() {
+          var params = new URLSearchParams(window.location.search);
+          var olahraga = params.get("olahraga");
+          var lokasi = params.get("lokasi");
+
+          if (olahraga) {
+            var checkbox = document.querySelector(
+              '.filter-olahraga[value="' + olahraga + '"]',
+            );
+            if (checkbox) checkbox.checked = true;
+          }
+
+          if (lokasi) {
+            var kotaOptions = Array.prototype.slice.call(kotaSelect.options);
+            var matched = kotaOptions.some(function (opt) {
+              return opt.value === lokasi;
+            });
+            if (matched) {
+              kotaSelect.value = lokasi;
+            } else {
+              searchInput.value = lokasi;
+            }
+          }
+        }
+
+        applyParamsFromURL();
         applySort();
         applyFilters();
       })();
