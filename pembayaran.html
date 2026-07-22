@@ -1,0 +1,727 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SportSpot - Detail Pemesanan & Pembayaran</title>
+
+    <!-- Bootstrap 5.3.3 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style/index.css" />
+
+    <!-- Custom CSS untuk halaman pemesanan -->
+    <style>
+      :root {
+        --primary-navy: #003b95;
+        --primary-navy-hover: #002d72;
+        --bg-body: #f4f5f9;
+        --text-main: #222222;
+        --text-muted: #737373;
+        --border-color: #e4e6eb;
+        --error-color: #dc3545;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+      }
+
+      /* ================= CHECKOUT NAVBAR & BREADCRUMB STYLES ================= */
+      .navbar-custom {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+      .brand-logo {
+        font-weight: 700;
+        color: var(--primary-navy) !important;
+        text-decoration: none;
+      }
+      .brand-logo:hover {
+        color: var(--primary-navy) !important; 
+      }
+      
+      .step-progress {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-size: 1rem;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #a0a0a0;
+        transition: all 0.3s ease;
+      }
+      .step.active {
+        color: var(--text-main);
+        font-weight: 600;
+      }
+      .step-num {
+        width: 36px;
+        height: 36px;
+        border: 2px solid #dcdcdc;
+        color: #a0a0a0;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1; 
+        transition: all 0.3s ease;
+      }
+      .step.active .step-num {
+        background-color: var(--primary-navy);
+        border-color: var(--primary-navy);
+        color: white;
+      }
+      .step-arrow {
+        font-size: 0.9rem;
+        color: #dcdcdc;
+      }
+      
+      @media (max-width: 768px) {
+        .step-progress { gap: 12px; }
+        .step-text { display: none; }
+        .step-num { width: 30px; height: 30px; font-size: 0.85rem; }
+      }
+
+      /* Global Button Styles */
+      .text-navy { color: var(--primary-navy); }
+      
+      .btn-navy {
+        background-color: var(--primary-navy);
+        color: white;
+        font-weight: 600;
+        transition: all 0.3s ease;
+      }
+      .btn-navy:not(.disabled-look):hover { 
+        background-color: var(--primary-navy-hover); 
+        color: white; 
+        transform: translateY(-1px);
+      }
+      .btn-navy.disabled-look {
+        background-color: #cccccc !important;
+        color: #888888 !important;
+        cursor: not-allowed;
+        transform: none !important;
+        border: none !important;
+      }
+
+      .btn-back {
+        color: var(--primary-navy);
+        font-weight: 600;
+        font-size: 0.95rem;
+        text-decoration: none;
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        transition: color 0.2s ease;
+      }
+      .btn-back:hover { color: var(--primary-navy-hover); }
+
+      /* Card Global Styles */
+      .card-custom {
+        border: none;
+        border-radius: 16px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+        background-color: #ffffff;
+        padding: 30px; 
+      }
+      .section-title {
+        font-size: 1.15rem;
+        font-weight: 700;
+        color: var(--text-main);
+        margin-bottom: 1.5rem;
+      }
+
+      /* Form Elements */
+      .form-label-custom {
+        font-size: 0.85rem;
+        font-weight: 600;
+        color: #4a4a4a;
+        margin-bottom: 0.5rem;
+      }
+      .form-control-custom {
+        border-radius: 10px;
+        border: 1px solid var(--border-color);
+        font-size: 0.95rem;
+        padding: 0.75rem 1.2rem;
+        color: var(--text-main);
+        /* Transisi diubah spesifik border & box-shadow agar background-image icon SVG tidak ikut beranimasi */
+        transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      }
+      .form-control-custom::placeholder { color: #a9a9a9; }
+      .form-control-custom:focus {
+        border-color: var(--primary-navy);
+        box-shadow: 0 0 0 4px rgba(0, 59, 149, 0.1);
+        outline: none;
+      }
+
+      /* Form Validation Styles dengan Icon Warning Static */
+      .form-control-custom.is-invalid {
+        border-color: var(--error-color) !important;
+        background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e") !important;
+        background-repeat: no-repeat !important;
+        background-position: right calc(0.375em + 0.1875rem) center !important;
+        background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem) !important;
+      }
+      .form-control-custom.is-invalid:focus {
+        box-shadow: 0 0 0 4px rgba(220, 53, 69, 0.1) !important;
+      }
+      .invalid-feedback-custom {
+        display: none;
+        width: 100%;
+        margin-top: 0.35rem;
+        font-size: 0.8rem;
+        color: var(--error-color);
+      }
+      .form-control-custom.is-invalid ~ .invalid-feedback-custom {
+        display: block;
+      }
+
+      /* Payment Accordion Styles */
+      .payment-options-container {
+        display: flex;
+        flex-direction: column;
+        gap: 16px; 
+      }
+      .payment-row-card {
+        border: 1px solid var(--border-color);
+        border-radius: 12px;
+        overflow: hidden;
+        background: white;
+        transition: all 0.3s ease;
+      }
+      .payment-row-card.active {
+        border-color: var(--primary-navy);
+        box-shadow: 0 6px 16px rgba(0, 59, 149, 0.08);
+      }
+      
+      .payment-row-header {
+        padding: 1.1rem 1.25rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        user-select: none;
+        transition: background-color 0.2s ease;
+      }
+      .payment-row-card.active .payment-row-header { 
+        background-color: #f8faff; 
+      }
+      .header-left-side {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 1rem;
+        font-weight: 600;
+        color: var(--text-main);
+      }
+      .custom-radio {
+        width: 20px;
+        height: 20px;
+        border: 2px solid #ccc;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.2s;
+        flex-shrink: 0;
+      }
+      .payment-row-card.active .custom-radio { border-color: var(--primary-navy); }
+      .payment-row-card.active .custom-radio::before {
+        content: '';
+        width: 10px;
+        height: 10px;
+        background-color: var(--primary-navy);
+        border-radius: 50%;
+        display: block;
+      }
+      .method-icon { width: 24px; height: 24px; fill: #666; }
+      .payment-row-card.active .method-icon { fill: var(--primary-navy); }
+      
+      .payment-row-content {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        background: white;
+      }
+      .content-inner-padding {
+        padding: 1.25rem 1.25rem 1.5rem 1.25rem;
+        border-top: 1px solid var(--border-color);
+      }
+
+      /* Virtual Account Grid */
+      .bank-options-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+        gap: 12px;
+        margin-top: 16px;
+      }
+      .bank-item-btn {
+        border: 1px solid var(--border-color);
+        border-radius: 10px;
+        padding: 14px 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
+        cursor: pointer;
+        transition: border-color 0.2s ease, background-color 0.2s ease;
+      }
+      .bank-item-btn:hover, .bank-item-btn.selected {
+        border-color: var(--primary-navy);
+        background-color: rgba(0, 59, 149, 0.03);
+      }
+      .bank-item-btn.selected {
+        border-width: 1.5px;
+      }
+      /* Class untuk memberi warna merah khusus pada opsi bank */
+      .bank-item-btn.is-invalid {
+        border-color: var(--error-color) !important;
+        background-color: rgba(220, 53, 69, 0.03);
+      }
+      .bank-logo-img { height: 22px; object-fit: contain; }
+      .bank-name-label { font-size: 0.75rem; font-weight: 600; color: #4a4a4a; }
+
+      /* Summary Sidebar Styles */
+      .summary-img {
+        width: 100px;
+        height: 75px;
+        object-fit: cover;
+        border-radius: 10px;
+      }
+      .hr-dashed {
+        border-top: 1px dashed var(--border-color);
+        margin: 1.5rem 0;
+      }
+      .summary-text-muted {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        line-height: 1.5;
+      }
+      .price-row {
+        font-size: 0.95rem;
+        color: var(--text-muted);
+        margin-bottom: 0.75rem;
+      }
+      .price-value {
+        color: var(--text-main);
+        font-weight: 500;
+      }
+    </style>
+  </head>
+  <body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar navbar-light bg-white navbar-custom border-bottom sticky-top">
+      <div class="container d-flex justify-content-between align-items-center">
+        
+        <!-- Brand Logo Kiri -->
+        <a class="navbar-brand brand-logo d-flex align-items-center gap-2 mb-0" href="/beranda.html">
+          <img src="/img/icon/Basketball.svg" alt="logo" />
+          SportSpot
+        </a>
+
+        <!-- Breadcrumb / Step Progress Kanan -->
+        <div class="step-progress">
+          <div class="step active">
+            <span class="step-num">1</span> 
+            <span class="step-text">Pemesanan & Pembayaran</span>
+          </div>
+          <span class="step-arrow">❯</span>
+          <div class="step">
+            <span class="step-num">2</span> 
+            <span class="step-text">Selesai</span>
+          </div>
+        </div>
+        
+      </div>
+    </nav>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="container py-5 mb-5">
+      <!-- Tombol Kembali -->
+      <a href="cari_lapangan.html" class="btn-back mb-4">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" fill="currentColor" class="bi bi-arrow-left-short" viewBox="0 0 16 16">
+          <path fill-rule="evenodd" d="M12 8a.5.5 0 0 1-.5.5H5.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L5.707 7.5H11.5a.5.5 0 0 1 .5.5z"/>
+        </svg>
+        Kembali
+      </a>
+
+      <div class="row g-4">
+        <!-- ================= KOLOM KIRI (Form & Pembayaran) ================= -->
+        <div class="col-lg-8">
+          
+          <!-- Data Pemesan -->
+          <div class="card-custom mb-4">
+            <h5 class="section-title">Data Pemesan</h5>
+            <form id="pemesanForm">
+              <div class="row g-4 mb-4">
+                <div class="col-md-6 position-relative">
+                  <label class="form-label-custom" for="inputNama">Nama Lengkap</label>
+                  <input type="text" class="form-control form-control-custom required-input" id="inputNama" placeholder="Masukan nama lengkap">
+                  <div class="invalid-feedback-custom" id="namaFeedback">Nama lengkap wajib diisi.</div>
+                </div>
+                <div class="col-md-6 position-relative">
+                  <label class="form-label-custom" for="inputPhone">Nomor Handphone</label>
+                  <input type="text" class="form-control form-control-custom required-input" id="inputPhone" placeholder="Masukan nomor handphone" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                  <div class="invalid-feedback-custom" id="phoneFeedback">Nomor handphone wajib diisi.</div>
+                </div>
+              </div>
+              <div class="position-relative">
+                <label class="form-label-custom" for="inputEmail">Email</label>
+                <input type="email" class="form-control form-control-custom required-input" id="inputEmail" placeholder="Masukan email">
+                <div class="invalid-feedback-custom" id="emailFeedback">Format email tidak valid.</div>
+              </div>
+            </form>
+          </div>
+
+          <!-- Metode Pembayaran -->
+          <div class="card-custom">
+            <h5 class="section-title">Metode Pembayaran</h5>
+            
+            <div class="payment-options-container" id="paymentMethods">
+              
+              <!-- VIRTUAL ACCOUNT -->
+              <div class="payment-row-card active" onclick="toggleAccordion(this)">
+                <div class="payment-row-header">
+                  <div class="header-left-side">
+                    <div class="custom-radio"></div>
+                    <span>Virtual Account</span>
+                  </div>
+                  <svg class="method-icon" viewBox="0 -960 960 960"><path d="M200-280v-280h80v280h-80Zm240 0v-280h80v280h-80ZM80-120v-80h800v80H80Zm600-160v-280h80v280h-80ZM80-640v-80l400-200 400 200v80H80Zm178-80h444-444Zm0 0h444L480-830 258-720Z"/></svg>
+                </div>
+                <div class="payment-row-content" onclick="event.stopPropagation();">
+                  <div class="content-inner-padding">
+                    <p class="summary-text-muted mb-0">Pilih bank di bawah ini untuk mendapatkan nomor Virtual Account pembayaran.</p>
+                    <div class="bank-options-grid">
+                      <div class="bank-item-btn" onclick="selectBank(this)">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/5c/Bank_Central_Asia.svg" alt="BCA" class="bank-logo-img">
+                        <span class="bank-name-label">BCA</span>
+                      </div>
+                      <div class="bank-item-btn" onclick="selectBank(this)">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/a/ad/Bank_Mandiri_logo_2016.svg" alt="Mandiri" class="bank-logo-img">
+                        <span class="bank-name-label">Mandiri</span>
+                      </div>
+                      <div class="bank-item-btn" onclick="selectBank(this)">
+                        <img src="https://upload.wikimedia.org/wikipedia/id/5/55/BNI_logo.svg" alt="BNI" class="bank-logo-img">
+                        <span class="bank-name-label">BNI</span>
+                      </div>
+                      <div class="bank-item-btn" onclick="selectBank(this)">
+                        <img src="https://upload.wikimedia.org/wikipedia/commons/2/2e/BRI_2020.svg" alt="BRI" class="bank-logo-img">
+                        <span class="bank-name-label">BRI</span>
+                      </div>
+                    </div>
+                    <div class="invalid-feedback-custom" id="vaErrorMsg">Silakan pilih salah satu bank terlebih dahulu.</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- CREDIT CARD -->
+              <div class="payment-row-card" onclick="toggleAccordion(this)">
+                <div class="payment-row-header">
+                  <div class="header-left-side">
+                    <div class="custom-radio"></div>
+                    <span>Kartu Kredit / Debit</span>
+                  </div>
+                  <svg class="method-icon" viewBox="0 0 24 24"><path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/></svg>
+                </div>
+                <div class="payment-row-content" onclick="event.stopPropagation();">
+                  <div class="content-inner-padding">
+                    <div class="row g-4">
+                      <div class="col-12 position-relative">
+                        <label class="form-label-custom">Nama Pemegang Kartu</label>
+                        <input type="text" class="form-control form-control-custom cc-input" placeholder="Mis. John Doe">
+                        <div class="invalid-feedback-custom">Nama pemegang kartu wajib diisi.</div>
+                      </div>
+                      <div class="col-12 position-relative">
+                        <label class="form-label-custom">Nomor Kartu</label>
+                        <input type="text" class="form-control form-control-custom cc-input" placeholder="0000 0000 0000 0000" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <div class="invalid-feedback-custom">Nomor kartu wajib diisi.</div>
+                      </div>
+                      <div class="col-6 position-relative">
+                        <label class="form-label-custom">Masa Berlaku</label>
+                        <input type="text" class="form-control form-control-custom cc-input" placeholder="MM/YY">
+                        <div class="invalid-feedback-custom">Wajib diisi.</div>
+                      </div>
+                      <div class="col-6 position-relative">
+                        <label class="form-label-custom">CVC / CVV</label>
+                        <input type="password" class="form-control form-control-custom cc-input" placeholder="000" maxlength="4" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+                        <div class="invalid-feedback-custom">Wajib diisi.</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- E-WALLET -->
+              <div class="payment-row-card" onclick="toggleAccordion(this)">
+                <div class="payment-row-header">
+                  <div class="header-left-side">
+                    <div class="custom-radio"></div>
+                    <span>E-Wallet</span>
+                  </div>
+                  <svg class="method-icon" viewBox="0 0 24 24"><path d="M21 18v1c0 1.1-.9 2-2 2H5c-1.11 0-2-.9-2-2V5c0-1.1.89-2 2-2h14c1.1 0 2 .9 2 2v1h-9c-1.11 0-2 .9-2 2v8c0 1.1.89 2 2 2h9zm-9-2h10V8H12v8zm4-2.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+                </div>
+              </div>
+
+              <!-- CASH -->
+              <div class="payment-row-card" onclick="toggleAccordion(this)">
+                <div class="payment-row-header">
+                  <div class="header-left-side">
+                    <div class="custom-radio"></div>
+                    <span>Cash (Bayar di Tempat)</span>
+                  </div>
+                  <svg class="method-icon" viewBox="0 -960 960 960"><path d="M560-440q-50 0-85-35t-35-85q0-50 35-85t85-35q50 0 85 35t35 85q0 50-35 85t-85 35ZM280-320q-33 0-56.5-23.5T200-400v-320q0-33 23.5-56.5T280-800h560q33 0 56.5 23.5T920-720v320q0 33-23.5 56.5T840-320H280Zm80-80h400q0-33 23.5-56.5T840-480v-160q-33 0-56.5-23.5T760-720H360q0 33-23.5 56.5T280-640v160q33 0 56.5 23.5T360-400Zm440 240H120q-33 0-56.5-23.5T40-240v-440h80v440h680v80ZM280-400v-320 320Z"/></svg>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+        </div>
+
+        <!-- ================= KOLOM KANAN (Ringkasan Pesanan) ================= -->
+        <div class="col-lg-4">
+          <div class="card-custom sticky-top" style="top: 100px;">
+            <h5 class="section-title">Ringkasan Pesanan</h5>
+            
+            <!-- Info Lapangan -->
+            <div class="d-flex align-items-center mb-3">
+              <img src="/img/gor.jpg" alt="Arena Sport Hall" class="summary-img me-3" onerror="this.src='https://via.placeholder.com/75'">
+              <div>
+                <h6 class="fw-bold mb-1 fs-6">Arena Sport Hall</h6>
+                <div class="summary-text-muted">
+                  Sabtu, 26 Juli 2026<br>
+                  09:00 - 10:00 WIB
+                </div>
+              </div>
+            </div>
+
+            <div class="hr-dashed"></div>
+
+            <!-- Rincian Harga -->
+            <div class="d-flex justify-content-between price-row">
+              <span>Harga Sewa</span>
+              <span class="price-value">Rp 120.000</span>
+            </div>
+            <div class="d-flex justify-content-between price-row mb-0">
+              <span>Biaya Admin</span>
+              <span class="price-value">Rp 5.000</span>
+            </div>
+
+            <div class="hr-dashed"></div>
+
+            <!-- Total Bayar -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <span class="fw-bold text-main" style="font-size: 1.05rem;">Total Bayar</span>
+              <span class="fw-bold text-navy" style="font-size: 1.25rem;">Rp 125.000</span>
+            </div>
+
+            <!-- Tombol Pesan -->
+            <button id="btnPesanSekarang" type="button" class="btn btn-navy disabled-look w-100 py-3 rounded-3 fs-6">Pesan Sekarang</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Script untuk Interaksi & Validasi -->
+    <script>
+      const btnPesan = document.getElementById('btnPesanSekarang');
+      const requiredInputs = document.querySelectorAll('.required-input');
+      const vaErrorMsg = document.getElementById('vaErrorMsg');
+      const ccInputs = document.querySelectorAll('.cc-input');
+      let isSubmitAttempted = false;
+
+      function isValidEmail(email) {
+        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return re.test(String(email).toLowerCase());
+      }
+
+      // Cek apakah seluruh form terisi dengan benar (Update visual tombol aja)
+      function checkFormValidity() {
+        let isDataValid = true;
+        requiredInputs.forEach(input => {
+            const val = input.value.trim();
+            if (val === "") isDataValid = false;
+            if (input.id === 'inputEmail' && val !== "" && !isValidEmail(val)) isDataValid = false;
+        });
+
+        const activeMethod = document.querySelector('.payment-row-card.active');
+        let isMethodValid = false;
+
+        if (activeMethod) {
+            const methodText = activeMethod.querySelector('.header-left-side span').textContent.trim();
+            if (methodText === "Virtual Account") {
+                const selectedBank = activeMethod.querySelector('.bank-item-btn.selected');
+                if (selectedBank) isMethodValid = true;
+            } 
+            else if (methodText === "Kartu Kredit / Debit") {
+                let ccFilled = true;
+                ccInputs.forEach(cc => { if(cc.value.trim() === "") ccFilled = false; });
+                isMethodValid = ccFilled;
+            } 
+            else {
+                isMethodValid = true;
+            }
+        }
+
+        if (isDataValid && isMethodValid) {
+            btnPesan.classList.remove('disabled-look');
+            return true;
+        } else {
+            btnPesan.classList.add('disabled-look');
+            return false;
+        }
+      }
+
+      // Tampilkan error secara visual (Merahin spesifik di field / bank)
+      function showErrors() {
+        // 1. Validasi Input Data Pemesan
+        requiredInputs.forEach(input => {
+          const val = input.value.trim();
+          const feedbackEl = input.nextElementSibling; 
+          
+          if (val === "") {
+            input.classList.add('is-invalid');
+            if(input.id === 'inputEmail') feedbackEl.textContent = "Email wajib diisi.";
+            else if (input.id === 'inputNama') feedbackEl.textContent = "Nama lengkap wajib diisi.";
+            else if (input.id === 'inputPhone') feedbackEl.textContent = "Nomor handphone wajib diisi.";
+          } else {
+            if (input.id === 'inputEmail' && !isValidEmail(val)) {
+              input.classList.add('is-invalid');
+              feedbackEl.textContent = "Format email tidak valid.";
+            } else {
+              input.classList.remove('is-invalid');
+            }
+          }
+        });
+
+        // 2. Validasi Metode Pembayaran
+        const activeMethod = document.querySelector('.payment-row-card.active');
+        
+        // Bersihkan state error metode pembayaran dulu
+        document.querySelectorAll('.bank-item-btn').forEach(b => b.classList.remove('is-invalid'));
+        if(vaErrorMsg) vaErrorMsg.style.display = 'none';
+
+        if (activeMethod) {
+            const methodText = activeMethod.querySelector('.header-left-side span').textContent.trim();
+            
+            if (methodText === "Virtual Account") {
+                const selectedBank = activeMethod.querySelector('.bank-item-btn.selected');
+                if (!selectedBank) {
+                    // Kasih border merah langsung ke tombol-tombol banknya
+                    activeMethod.querySelectorAll('.bank-item-btn').forEach(b => b.classList.add('is-invalid'));
+                    if(vaErrorMsg) vaErrorMsg.style.display = 'block';
+                }
+            } 
+            else if (methodText === "Kartu Kredit / Debit") {
+                ccInputs.forEach(cc => {
+                    if (cc.value.trim() === "") {
+                        cc.classList.add('is-invalid');
+                    } else {
+                        cc.classList.remove('is-invalid');
+                    }
+                });
+            }
+        }
+      }
+
+      // Event Listener saat mengetik Data Pemesan
+      requiredInputs.forEach(input => {
+        input.addEventListener('input', () => {
+           checkFormValidity();
+           if (isSubmitAttempted) showErrors();
+        });
+      });
+
+      // Event Listener untuk Input Kartu Kredit
+      ccInputs.forEach(cc => {
+        cc.addEventListener('input', () => {
+            checkFormValidity();
+            if (isSubmitAttempted) showErrors();
+        });
+      });
+
+      // Event Klik Tombol "Pesan Sekarang"
+      btnPesan.addEventListener('click', function(e) {
+          e.preventDefault();
+          isSubmitAttempted = true; 
+          
+          const isValid = checkFormValidity();
+          
+          if (!isValid) {
+              showErrors(); // Hanya menyalakan merah-merah, tanpa nge-pop alert
+          } else {
+              // Jika sukses
+              window.location.href = 'pesanan_selesai.html'; 
+          }
+      });
+
+      // ================= ACCORDION METHOD =================
+      function toggleAccordion(cardElement) {
+        const allCards = document.querySelectorAll('.payment-row-card');
+        
+        allCards.forEach(card => {
+            const content = card.querySelector('.payment-row-content');
+            if (card === cardElement) {
+                card.classList.add('active');
+                if(content) {
+                    content.style.maxHeight = content.scrollHeight + "px"; 
+                }
+            } else {
+                card.classList.remove('active');
+                if(content) {
+                    content.style.maxHeight = "0px"; 
+                }
+            }
+        });
+
+        checkFormValidity();
+        if (isSubmitAttempted) showErrors();
+      }
+
+      function selectBank(bankBtn) {
+        const parentGrid = bankBtn.closest('.bank-options-grid');
+        const allBanks = parentGrid.querySelectorAll('.bank-item-btn');
+        allBanks.forEach(btn => btn.classList.remove('selected'));
+        
+        bankBtn.classList.add('selected');
+        
+        // Hapus border merah dari semua bank pas ada yang dipilih
+        allBanks.forEach(btn => btn.classList.remove('is-invalid'));
+        if(vaErrorMsg) vaErrorMsg.style.display = 'none';
+
+        checkFormValidity();
+        if (isSubmitAttempted) showErrors();
+      }
+
+      // Buka VA by default
+      window.onload = function() {
+        const activeCard = document.querySelector('.payment-row-card.active');
+        if(activeCard) {
+          const content = activeCard.querySelector('.payment-row-content');
+          if(content) content.style.maxHeight = content.scrollHeight + "px";
+        }
+        checkFormValidity();
+      };
+    </script>
+  </body>
+</html>
