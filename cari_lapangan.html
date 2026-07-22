@@ -25,7 +25,7 @@
       <div class="container">
         <a
           class="navbar-brand brand-logo d-flex align-items-center gap-2"
-          href="#"
+          href="/index.html"
         >
           <img src="/img/icon/Basketball.svg" alt="logo" />
           SportSpot
@@ -41,7 +41,7 @@
         <div class="collapse navbar-collapse" id="navMenu">
           <ul class="navbar-nav mx-auto gap-lg-4">
             <li class="nav-item">
-              <a class="nav-link" href="/beranda.html">Beranda</a>
+              <a class="nav-link" href="/index.html">Beranda</a>
             </li>
             <li class="nav-item">
               <a class="nav-link active" href="#">Cari Lapangan</a>
@@ -297,20 +297,6 @@
               Tidak ada lapangan yang cocok dengan filter kamu. Coba ubah kriteria pencarian.
             </div>
 
-            <!--
-              CATATAN UNTUK GANTI DATA GOR:
-              Setiap card dibungkus .gor-card-item dengan atribut data-* di bawah ini,
-              itu yang dibaca oleh script filter/sort/search di bagian akhir halaman.
-              Saat mengganti data GOR asli, pastikan atribut ini ikut disesuaikan:
-                data-nama        -> nama GOR (dipakai untuk pencarian)
-                data-kota        -> harus SAMA PERSIS dengan salah satu <option> di filter Kota
-                data-olahraga    -> salah satu dari: Badminton, Futsal, Basket, Tenis, Voli, Tenis Meja, Lari
-                data-harga       -> angka saja, tanpa titik/Rp (contoh: 75000)
-                data-rating      -> angka desimal (contoh: 4.8)
-                data-fasilitas   -> gabungan value fasilitas dipisah koma, value harus sama dengan
-                                     value checkbox Fasilitas (parkir, kantin, ruang-ganti, wifi, mushola, ac, toilet)
-                data-popularitas -> angka urutan default untuk sort "Terpopuler" (semakin kecil, semakin depan)
-            -->
             <div id="resultsGrid" class="row g-4">
               <!-- card 1 -->
               <div class="col-md-6 gor-card-item"
@@ -469,7 +455,7 @@
               </div>
             </div>
 
-            <!-- ================= PAGINATION (native Bootstrap, tampilan saja - lihat catatan di chat) ================= -->
+            <!-- ================= PAGINATION ================= -->
             <nav aria-label="Pagination" class="mt-5">
               <ul class="pagination justify-content-center gap-2 mb-0">
                 <li class="page-item">
@@ -493,10 +479,10 @@
       <div class="container">
         <div class="d-flex flex-row justify-content-between g-4 pb-4">
           <div class="col-md-4">
-            <div class="footer-brand mb-3 fs-5">
+            <a href="/index.html" class="footer-brand mb-3 fs-5 text-decoration-none d-inline-flex align-items-center gap-2">
               <img src="img/icon/Basketball-putih.svg" alt="logo" />
               SportSpot
-            </div>
+            </a>
             <p class="mb-3">
               Platform booking lapangan olahraga #1 di Indonesia. Kami membantu
               atlet dan komunitas olahraga menemukan tempat terbaik untuk
@@ -518,7 +504,7 @@
           <div class="col-md-2 col-6">
             <h6 class="mb-3">JELAJAHI</h6>
             <ul class="list-unstyled d-flex flex-column gap-2">
-              <li><a href="#">Cari Lapangan</a></li>
+              <li><a href="/cari_lapangan.html">Cari Lapangan</a></li>
               <li><a href="#">Promo Terbaru</a></li>
               <li><a href="#">Kategori Olahraga</a></li>
               <li><a href="#">Artikel Olahraga</a></li>
@@ -528,7 +514,7 @@
           <div class="col-md-2 col-6">
             <h6 class="mb-3">PERUSAHAAN</h6>
             <ul class="list-unstyled d-flex flex-column gap-2">
-              <li><a href="#">Tentang Kami</a></li>
+              <li><a href="/about_us.html">Tentang Kami</a></li>
               <li><a href="#">Karir</a></li>
               <li><a href="#">Blog</a></li>
               <li><a href="#">Hubungi Kami</a></li>
