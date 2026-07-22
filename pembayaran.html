@@ -571,7 +571,7 @@
     
     <!-- Script untuk Interaksi & Validasi -->
     <script>
-  const btnPesan = document.getElementById('btnPesanSekarang');
+ const btnPesan = document.getElementById('btnPesanSekarang');
   const inputNama = document.getElementById('inputNama');
   const inputPhone = document.getElementById('inputPhone');
   const inputEmail = document.getElementById('inputEmail');
@@ -580,11 +580,38 @@
   const ccInputs = document.querySelectorAll('.cc-input');
   let isSubmitAttempted = false;
 
+  const BIAYA_ADMIN = 5000;
+
   function isValidEmail(email) {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
   }
 
-  // Cek validitas form secara keseluruhan untuk status tombol
+  function formatRupiah(angka) {
+    return 'Rp ' + angka.toLocaleString('id-ID');
+  }
+
+  // ---------- 1. MUAT DATA SEWA DARI LOCALSTORAGE ----------
+  function loadBookingSummary() {
+    const savedBooking = JSON.parse(localStorage.getItem('sportSpotBooking'));
+    
+    if (savedBooking) {
+      if (savedBooking.venue) document.getElementById('summaryVenue').textContent = savedBooking.venue;
+      if (savedBooking.date) document.getElementById('summaryDate').textContent = savedBooking.date;
+      if (savedBooking.time) document.getElementById('summaryTime').textContent = savedBooking.time + ' WIB';
+      
+      const hargaSewa = savedBooking.rentalPrice || 120000;
+      const grandTotal = hargaSewa + BIAYA_ADMIN;
+
+      // Update Tampilan Harga Sewa & Total Bayar
+      const priceRows = document.querySelectorAll('.price-row .price-value');
+      if (priceRows.length >= 1) priceRows[0].textContent = formatRupiah(hargaSewa);
+      if (priceRows.length >= 2) priceRows[1].textContent = formatRupiah(BIAYA_ADMIN);
+      
+      document.getElementById('summaryTotal').textContent = formatRupiah(grandTotal);
+    }
+  }
+
+  // ---------- 2. VALIDASI FORM & METODE PEMBAYARAN ----------
   function checkFormValidity() {
     let isDataValid = true;
     requiredInputs.forEach(input => {
@@ -621,7 +648,6 @@
     }
   }
 
-  // Menampilkan indikator error visual (garis merah) pada field yang kosong/salah
   function showErrors() {
     requiredInputs.forEach(input => {
       const val = input.value.trim();
@@ -668,7 +694,7 @@
     }
   }
 
-  // Event listener saat user mengetik
+  // ---------- 3. EVENT LISTENERS ----------
   requiredInputs.forEach(input => {
     input.addEventListener('input', () => {
        checkFormValidity();
@@ -683,7 +709,6 @@
     });
   });
 
-  // Tombol "Pesan Sekarang" diklik
   btnPesan.addEventListener('click', function(e) {
       e.preventDefault();
       isSubmitAttempted = true; 
@@ -691,13 +716,13 @@
       if (!checkFormValidity()) {
           showErrors(); 
       } else {
-          // Tampilkan modal konfirmasi Bootstrap
           const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
           confirmModal.show();
       }
   });
 
-document.getElementById('btnConfirmPay').addEventListener('click', function() {
+  // ---------- 4. PROSES KONFIRMASI BAYAR & ROUTE KE SELESAI ----------
+  document.getElementById('btnConfirmPay').addEventListener('click', function() {
     const activeMethod = document.querySelector('.payment-row-card.active');
     let methodString = "Lainnya";
     let baseMethod = "";
@@ -713,7 +738,6 @@ document.getElementById('btnConfirmPay').addEventListener('click', function() {
         }
     }
 
-    // Status: Jika Cash -> "Tertunda", selain itu -> "Lunas"
     let statusString = "Lunas";
     if (baseMethod.toLowerCase().includes("cash") || baseMethod.toLowerCase().includes("tempat")) {
         statusString = "Tertunda";
@@ -725,23 +749,26 @@ document.getElementById('btnConfirmPay').addEventListener('click', function() {
     const totalEl = document.getElementById('summaryTotal');
 
     const orderData = {
-        code: 'VX-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000),
+        code: 'SS-' + new Date().getFullYear() + '-' + Math.floor(100000 + Math.random() * 900000),
         name: inputNama.value.trim(),
         phone: inputPhone.value.trim(),
         email: inputEmail.value.trim(),
         method: methodString,
-        status: statusString, // <-- Menyimpan status "Tertunda"
+        status: statusString,
         venue: venueEl ? venueEl.textContent : '-',
         date: dateEl ? dateEl.textContent : '-',
         time: timeEl ? timeEl.textContent : '-',
         total: totalEl ? totalEl.textContent : '-'
     };
 
+    // Simpan data final pemesanan
     localStorage.setItem('sportSpotOrder', JSON.stringify(orderData));
+    
+    // Redirect ke halaman Konfirmasi / Selesai
     window.location.href = 'konfirmasi.html'; 
-});
+  });
 
-  // Fungsi Accordion Metode Pembayaran
+  // ---------- 5. ACCORDION & SELEKSI BANK ----------
   function toggleAccordion(cardElement) {
     document.querySelectorAll('.payment-row-card').forEach(card => {
         const content = card.querySelector('.payment-row-content');
@@ -758,7 +785,6 @@ document.getElementById('btnConfirmPay').addEventListener('click', function() {
     if (isSubmitAttempted) showErrors();
   }
 
-  // Fungsi Pilih Bank Virtual Account
   function selectBank(bankBtn) {
     const parentGrid = bankBtn.closest('.bank-options-grid');
     parentGrid.querySelectorAll('.bank-item-btn').forEach(btn => {
@@ -773,8 +799,10 @@ document.getElementById('btnConfirmPay').addEventListener('click', function() {
     if (isSubmitAttempted) showErrors();
   }
 
-  // Inisialisasi awal saat halaman dimuat
+  // ---------- IN
   window.onload = function() {
+    loadBookingSummary();
+
     const activeCard = document.querySelector('.payment-row-card.active');
     if(activeCard) {
       const content = activeCard.querySelector('.payment-row-content');

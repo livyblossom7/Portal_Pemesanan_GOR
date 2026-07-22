@@ -852,18 +852,23 @@
               </div>
 
               <div class="card status-card shadow-sm mb-3">
-                <div class="card-body">
-                  <h4 class="h6 fw-bold mb-3">Status Pemilihan</h4>
-                  <div class="status-row">
-                    <span class="status-label">Tanggal</span>
-                    <span id="statusTanggal" class="status-value">Belum ada tanggal dipilih</span>
-                  </div>
-                  <div class="status-row">
-                    <span class="status-label">Jam</span>
-                    <span id="statusJam" class="status-value">Belum ada jam dipilih</span>
-                  </div>
-                </div>
-              </div>
+  <div class="card-body">
+    <h4 class="h6 fw-bold mb-3">Status Pemilihan</h4>
+    <div class="status-row">
+      <span class="status-label">Tanggal</span>
+      <span id="statusTanggal" class="status-value">Belum ada tanggal dipilih</span>
+    </div>
+    <div class="status-row">
+      <span class="status-label">Jam</span>
+      <span id="statusJam" class="status-value">Belum ada jam dipilih</span>
+    </div>
+    <!-- TAMBAHAN BARIS TOTAL HARGA -->
+    <div class="status-row mt-2 pt-2 border-top">
+      <span class="status-label">Total Harga</span>
+      <span id="statusTotal" class="status-value fs-6 text-primary fw-bold">Rp 0</span>
+    </div>
+  </div>
+</div>
 
               <button id="btnSewa" class="btn btn-navy w-100 py-2" disabled>
                 Sewa Sekarang
@@ -975,7 +980,7 @@
       });
     });
 
-    // ---------- KALENDER & SLOT JAM ----------
+    // ---------- KALENDER, SLOT JAM & PERHITUNGAN ----------
     var calMonthLabel = document.getElementById('calMonthLabel');
     var calGrid = document.getElementById('calGrid');
     var calPrev = document.getElementById('calPrev');
@@ -984,7 +989,11 @@
     var slotHint = document.getElementById('slotHint');
     var statusTanggal = document.getElementById('statusTanggal');
     var statusJam = document.getElementById('statusJam');
+    var statusTotal = document.getElementById('statusTotal');
     var btnSewa = document.getElementById('btnSewa');
+
+    // Harga sewa per jam
+    var HARGA_PER_JAM = 120000;
 
     var namaBulan = [
       'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
@@ -1010,6 +1019,10 @@
       var mm = (m + 1) < 10 ? '0' + (m + 1) : (m + 1);
       var dd = d < 10 ? '0' + d : d;
       return y + '-' + mm + '-' + dd;
+    }
+
+    function formatRupiah(angka) {
+      return 'Rp ' + angka.toLocaleString('id-ID');
     }
 
     function renderCalendar() {
@@ -1107,7 +1120,7 @@
         selectedSlots.splice(idx, 1);
       }
 
-      selectedSlots.sort(); // Urutkan jam terawal ke akhir
+      selectedSlots.sort(); // Urutkan dari jam awal ke akhir
       renderSlots();
       updateStatus();
     }
@@ -1121,7 +1134,7 @@
     }
 
     function updateStatus() {
-      // Status Tanggal
+      // 1. Status Tanggal
       if (selectedDateKey) {
         statusTanggal.textContent = formatTanggalIndo(selectedDateKey);
         statusTanggal.classList.add('status-value-filled');
@@ -1130,7 +1143,7 @@
         statusTanggal.classList.remove('status-value-filled');
       }
 
-      // Status Jam (Format: "10:00 - 11:00, 11:00 - 12:00")
+      // 2. Status Jam
       if (selectedSlots.length > 0) {
         var formattedRanges = selectedSlots.map(function (jam) {
           var startHour = parseInt(jam.split(':')[0], 10);
@@ -1146,9 +1159,17 @@
         statusJam.classList.remove('status-value-filled');
       }
 
+      // 3. Hitung & Tampilkan Total Harga
+      var totalHarga = selectedSlots.length * HARGA_PER_JAM;
+      if (statusTotal) {
+        statusTotal.textContent = totalHarga > 0 ? formatRupiah(totalHarga) : 'Rp 0';
+      }
+
+      // 4. Status Tombol Sewa
       btnSewa.disabled = !(selectedDateKey && selectedSlots.length > 0);
     }
 
+    // ---------- NAVIGASI KALENDER ----------
     calPrev.addEventListener('click', function () {
       viewMonth -= 1;
       if (viewMonth < 0) {
@@ -1167,10 +1188,38 @@
       renderCalendar();
     });
 
+    // ---------- EVENT SEWA SEKARANG (PROSES ROUTING & SIMPAN LOCALSTORAGE) ----------
+    btnSewa.addEventListener('click', function () {
+  if (!selectedDateKey || selectedSlots.length === 0) return;
+
+  var formattedRanges = selectedSlots.map(function (jam) {
+    var startHour = parseInt(jam.split(':')[0], 10);
+    var endHour = startHour + 1;
+    var endSlot = (endHour < 10 ? '0' + endHour : endHour) + ':00';
+    return jam + ' - ' + endSlot;
+  });
+
+  var totalHargaSewa = selectedSlots.length * HARGA_PER_JAM;
+
+  // Simpan sementara draf sewa ke LocalStorage
+  var draftBooking = {
+    venue: 'Stadion Kridanggo',
+    date: formatTanggalIndo(selectedDateKey),
+    time: formattedRanges.join(', '),
+    rentalPrice: totalHargaSewa
+  };
+
+  localStorage.setItem('sportSpotBooking', JSON.stringify(draftBooking));
+
+  // Arahkan ke halaman Pembayaran
+  window.location.href = 'pembayaran.html'; 
+});
+
+    // Inisialisasi tampilan awal
     renderCalendar();
     renderSlots();
     updateStatus();
   })();
-    </script>
+</script>
   </body>
 </html>
