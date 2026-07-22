@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SportSpot</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+.hero-img {
+  height: 400px;
+  object-fit: cover;
+}
+
+.thumb img {
+  height: 80px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.price-box {
+  border-radius: 12px;
+}
+
+.facility i {
+  font-size: 20px;
+}
+</style>
+
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar navbar-expand-lg bg-white shadow-sm">
+  <div class="container">
+    <a class="navbar-brand fw-bold">SportSpot</a>
+    <div class="collapse navbar-collapse">
+      <ul class="navbar-nav me-auto ms-4">
+        <li class="nav-item">Cari Lapangan</li>
+        <li class="nav-item ms-3">Promo</li>
+        <li class="nav-item ms-3">Jadwal Saya</li>
+        <li class="nav-item ms-3">Bantuan</li>
+      </ul>
+      <button class="btn btn-outline-primary me-2">Masuk</button>
+      <button class="btn btn-primary">Daftar</button>
+    </div>
+  </div>
+</nav>
+
+<div class="container mt-3">
+
+  <!-- BREADCRUMB -->
+  <small class="text-muted">
+    Beranda > Cari Lapangan > Stadion
+  </small>
+
+  <!-- IMAGE -->
+  <div class="mt-3">
+    <img src="gor.jpg" class="w-100 rounded hero-img">
+  </div>
+
+  <!-- THUMBNAIL -->
+  <div class="d-flex gap-2 mt-2 thumb">
+    <img src="gor.jpg">
+    <img src="gor.jpg">
+    <img src="gor.jpg">
+    <img src="gor.jpg">
+  </div>
+
+  <!-- CONTENT -->
+  <div class="row mt-4">
+
+    <!-- LEFT -->
+    <div class="col-md-8">
+
+      <h2 class="fw-bold">Arena Sport Hall</h2>
+      <p class="text-muted">Jl. Stadion No.1, Tangerang</p>
+
+      <!-- TAG -->
+      <span class="badge bg-light text-dark">Basket</span>
+      <span class="badge bg-light text-dark">Voli</span>
+
+      <!-- DESKRIPSI -->
+      <div class="mt-4">
+        <h5 class="fw-bold">Tentang Lapangan</h5>
+        <p class="text-muted">
+          Arena Sport Hall merupakan pusat olahraga modern di Tangerang.
+          Menggunakan lantai interlock berkualitas internasional.
+        </p>
+      </div>
+
+      <!-- FASILITAS -->
+      <div class="mt-4">
+        <h5 class="fw-bold">Fasilitas Tersedia</h5>
+        <div class="row facility text-center mt-3">
+
+          <div class="col-3">Parkir Luas</div>
+          <div class="col-3">Kantin</div>
+          <div class="col-3">WiFi</div>
+          <div class="col-3">Ruang Ganti</div>
+
+          <div class="col-3 mt-3">Mushola</div>
+          <div class="col-3 mt-3">AC</div>
+          <div class="col-3 mt-3">Toilet</div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- RIGHT -->
+    <div class="col-md-4">
+
+      <div class="card p-3 shadow-sm price-box">
+
+        <p class="text-muted mb-1">Mulai dari</p>
+        <h3 class="fw-bold text-primary">Rp 120.000 <small>/jam</small></h3>
+
+        <hr>
+
+        <label>Tanggal</label>
+        <input type="date" class="form-control mb-2">
+
+        <label>Jam</label>
+        <select class="form-select mb-3">
+          <option>08:00</option>
+          <option>09:00</option>
+          <option>10:00</option>
+          <option>11:00</option>
+          <option>12:00</option>
+          <option>13:00</option>
+          <option>14:00</option>
+          <option>15:00</option>
+          <option>16:00</option>
+          <option>17:00</option>
+          <option>18:00</option>
+          <option>19:00</option>
+          <option>20:00</option>
+          <option>21:00</option>
+          <option>22:00</option>
+          <option>23:00</option>
+        </select>
+
+        <button class="btn btn-primary w-100">
+          Selanjutnya
+        </button>
+
+      </div>
+
+      <!-- PROMO -->
+      <div class="bg-primary text-white p-3 mt-3 rounded">
+        Diskon 20% bagi Member Baru!
+      </div>
+
+    </div>
+
+  </div>
+
+</div>
+
+</body>
+</html>
+
+<!-- JADWAL -->
+<div class="mt-5">
+  <h5 class="fw-bold">Jadwal Ketersediaan</h5>
+
+  <div class="row mt-3">
+    
+    <!-- KALENDER -->
+    <div class="col-md-6">
+      <div class="border p-3 rounded text-center">
+        <h6>Mei 2024</h6>
+        <div class="d-flex flex-wrap justify-content-between mt-3">
+          <!-- tanggal -->
+          <span class="p-2">1</span>
+          <span class="p-2">2</span>
+          <span class="p-2">3</span>
+          <span class="p-2">4</span>
+          <span class="p-2">5</span>
+          <span class="p-2">6</span>
+          <span class="p-2">7</span>
+          <span class="p-2">8</span>
+          <span class="p-2">9</span>
+          <span class="p-2">10</span>
+          <span class="p-2">11</span>
+          <span class="p-2">12</span>
+          <span class="p-2">13</span>
+          <span class="p-2">14</span>
+          <span class="p-2">15</span>
+          <span class="p-2">16</span>
+          <span class="p-2">17</span>
+          <span class="p-2">18</span>
+          <span class="p-2">19</span>
+
+          <!-- selected -->
+          <span class="p-2 bg-primary text-white rounded">20</span>
+
+          <span class="p-2">21</span>
+          <span class="p-2">22</span>
+          <span class="p-2">23</span>
+          <span class="p-2">24</span>
+          <span class="p-2">25</span>
+          <span class="p-2">26</span>
+          <span class="p-2">27</span>
+          <span class="p-2">28</span>
+          <span class="p-2">29</span>
+          <span class="p-2">30</span>
+          <span class="p-2">31</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- JAM -->
+    <div class="col-md-6">
+      <h6>Pilih Jam Main</h6>
+      <div class="d-flex flex-wrap gap-2 mt-2">
+        <button class="btn btn-outline-primary">06:00</button>
+        <button class="btn btn-outline-primary">07:00</button>
+        <button class="btn btn-outline-secondary">08:00</button>
+        <button class="btn btn-outline-primary">09:00</button>
+        <button class="btn btn-primary">10:00</button>
+        <button class="btn btn-outline-primary">11:00</button>
+        <button class="btn btn-outline-primary">12:00</button>
+        <button class="btn btn-outline-secondary">14:00</button>
+        <button class="btn btn-outline-primary">15:00</button>
+        <button class="btn btn-outline-primary">16:00</button>
+        <button class="btn btn-outline-primary">17:00</button>
+        <button class="btn btn-outline-primary">18:00</button>
+        <button class="btn btn-outline-primary">19:00</button>
+        <button class="btn btn-outline-primary">20:00</button>
+        <button class="btn btn-outline-primary">21:00</button>
+        <button class="btn btn-outline-primary">22:00</button>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+<!-- KONTAK -->
+<div class="mt-5">
+  <h5 class="fw-bold">Kontak & Jam Operasional</h5>
+
+  <div class="row mt-3">
+    <div class="col-md-6">
+      <p><strong>Bp. Bambang</strong> (Pengelola)</p>
+      <p class="text-success">+62 812-3456-7890 (WhatsApp)</p>
+    </div>
+
+    <div class="col-md-6">
+      <p>Buka Setiap Hari</p>
+      <p><strong>08:00 - 23:00</strong></p>
+    </div>
+  </div>
+</div>
+
+
+<!-- ULASAN -->
+<div class="mt-5">
+  <h5 class="fw-bold">Ulasan & Rating</h5>
+
+  <div class="row mt-4">
+
+    <!-- RATING -->
+    <div class="col-md-4 text-center">
+      <h1 class="fw-bold text-primary">4.8</h1>
+      <p>⭐⭐⭐⭐⭐</p>
+      <small class="text-muted">124 Ulasan</small>
+    </div>
+
+    <!-- BAR -->
+    <div class="col-md-8">
+      <p>5 ⭐ <div class="progress"><div class="progress-bar" style="width: 90%"></div></div></p>
+      <p>4 ⭐ <div class="progress"><div class="progress-bar" style="width: 60%"></div></div></p>
+      <p>3 ⭐ <div class="progress"><div class="progress-bar" style="width: 20%"></div></div></p>
+    </div>
+
+  </div>
+
+  <!-- KOMENTAR -->
+  <div class="mt-4">
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h6>Andi Dermawan ⭐⭐⭐⭐⭐</h6>
+        <p>Lapangannya bagus dan bersih, sangat nyaman!</p>
+      </div>
+    </div>
+
+    <div class="card mb-3">
+      <div class="card-body">
+        <h6>Siti Rahma ⭐⭐⭐⭐</h6>
+        <p>Tempat oke, cuma parkir agak penuh.</p>
+      </div>
+    </div>
+
+  </div>
+
+</div>
+
+<!-- DETAIL ULASAN -->
+<div class="mt-4">
+
+  <!-- REVIEW 1 -->
+  <div class="d-flex mb-4">
+    <div class="me-3">
+      <div class="bg-light rounded-circle text-center" style="width:40px;height:40px;line-height:40px;">
+        AD
+      </div>
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between">
+        <div>
+          <strong>Andi Dermawan</strong><br>
+          <small class="text-muted">20 Mei 2024</small>
+        </div>
+        <div class="text-warning">★★★★★</div>
+      </div>
+
+      <p class="mt-2 text-muted">
+        Lantai interlocknya sangat bagus, tidak licin sama sekali.
+        Parkiran juga luas jadi gak repot.
+      </p>
+    </div>
+  </div>
+
+  <!-- REVIEW 2 -->
+  <div class="d-flex mb-4">
+    <div class="me-3">
+      <div class="bg-light rounded-circle text-center" style="width:40px;height:40px;line-height:40px;">
+        SR
+      </div>
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between">
+        <div>
+          <strong>Siti Rahma</strong><br>
+          <small class="text-muted">18 Mei 2024</small>
+        </div>
+        <div class="text-warning">★★★★☆</div>
+      </div>
+
+      <p class="mt-2 text-muted">
+        Tempat bersih, ada mushola juga jadi tenang.
+        Penjaga ramah dan proses booking cepat.
+      </p>
+    </div>
+  </div>
+
+  <!-- REVIEW 3 -->
+  <div class="d-flex mb-4">
+    <div class="me-3">
+      <div class="bg-light rounded-circle text-center" style="width:40px;height:40px;line-height:40px;">
+        BP
+      </div>
+    </div>
+
+    <div class="flex-grow-1">
+      <div class="d-flex justify-content-between">
+        <div>
+          <strong>Budi Pratama</strong><br>
+          <small class="text-muted">15 Mei 2024</small>
+        </div>
+        <div class="text-warning">★★★★★</div>
+      </div>
+
+      <p class="mt-2 text-muted">
+        Fasilitas lengkap, AC dingin, worth it banget!
+      </p>
+    </div>
+  </div>
+
+  <!-- LIHAT SEMUA -->
+  <div class="text-center">
+    <a href="#" class="text-primary fw-bold">Lihat Semua Ulasan</a>
+  </div>
+
+</div>
+
+
+<!-- FOOTER -->
+<footer class="mt-5 pt-5 border-top">
+  <div class="row">
+
+    <!-- LOGO -->
+    <div class="col-md-4">
+      <h4 class="fw-bold text-primary">SportSpot</h4>
+      <p class="text-muted">
+        Platform booking lapangan olahraga terpercaya di Indonesia.
+      </p>
+    </div>
+
+    <!-- PERUSAHAAN -->
+    <div class="col-md-2">
+      <h6 class="fw-bold">Perusahaan</h6>
+      <p class="text-muted">Tentang Kami</p>
+      <p class="text-muted">Karir</p>
+      <p class="text-muted">Blog</p>
+    </div>
+
+    <!-- LEGAL -->
+    <div class="col-md-3">
+      <h6 class="fw-bold">Legal</h6>
+      <p class="text-muted">Syarat & Ketentuan</p>
+      <p class="text-muted">Kebijakan Privasi</p>
+    </div>
+
+    <!-- DUKUNGAN -->
+    <div class="col-md-3">
+      <h6 class="fw-bold">Dukungan</h6>
+      <p class="text-muted">Hubungi Kami</p>
+      <p class="text-muted">Pusat Bantuan</p>
+    </div>
+
+  </div>
+
+  <div class="text-center mt-4 text-muted">
+    © 2024 SportSpot. All rights reserved.
+  </div>
+</footer>
