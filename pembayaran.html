@@ -502,41 +502,44 @@
 
         <!-- ================= KOLOM KANAN (Ringkasan Pesanan) ================= -->
         <div class="col-lg-4">
-          <div class="card-custom sticky-top" style="top: 100px;">
-            <h5 class="section-title">Ringkasan Pesanan</h5>
-            
-            <div class="d-flex align-items-center mb-3">
-              <img src="/img/gor.jpg" alt="Arena Sport Hall" class="summary-img me-3" onerror="this.src='https://via.placeholder.com/75'">
-              <div>
-                <h6 class="fw-bold mb-1 fs-6">Arena Sport Hall</h6>
-                <div class="summary-text-muted">
-                  Sabtu, 26 Juli 2026<br>
-                  09:00 - 10:00 WIB
-                </div>
-              </div>
-            </div>
-
-            <div class="hr-dashed"></div>
-
-            <div class="d-flex justify-content-between price-row">
-              <span>Harga Sewa</span>
-              <span class="price-value">Rp 120.000</span>
-            </div>
-            <div class="d-flex justify-content-between price-row mb-0">
-              <span>Biaya Admin</span>
-              <span class="price-value">Rp 5.000</span>
-            </div>
-
-            <div class="hr-dashed"></div>
-
-            <div class="d-flex justify-content-between align-items-center mb-4">
-              <span class="fw-bold text-main" style="font-size: 1.05rem;">Total Bayar</span>
-              <span class="fw-bold text-navy" style="font-size: 1.25rem;">Rp 125.000</span>
-            </div>
-
-            <button id="btnPesanSekarang" type="button" class="btn btn-navy disabled-look w-100 py-3 rounded-3 fs-6">Pesan Sekarang</button>
-          </div>
+  <div class="card-custom sticky-top" style="top: 100px;">
+    <h5 class="section-title">Ringkasan Pesanan</h5>
+    
+    <div class="d-flex align-items-center mb-3">
+      <img src="/img/gor.jpg" alt="Arena Sport Hall" class="summary-img me-3" onerror="this.src='https://via.placeholder.com/75'">
+      <div>
+        <!-- Tambahkan id="summaryVenue" -->
+        <h6 class="fw-bold mb-1 fs-6" id="summaryVenue">Arena Sport Hall</h6>
+        <div class="summary-text-muted">
+          <!-- Bungkus dengan span & tambahkan id="summaryDate" dan id="summaryTime" -->
+          <span id="summaryDate">Sabtu, 26 Juli 2026</span><br>
+          <span id="summaryTime">09:00 - 10:00 WIB</span>
         </div>
+      </div>
+    </div>
+
+    <div class="hr-dashed"></div>
+
+    <div class="d-flex justify-content-between price-row">
+      <span>Harga Sewa</span>
+      <span class="price-value">Rp 120.000</span>
+    </div>
+    <div class="d-flex justify-content-between price-row mb-0">
+      <span>Biaya Admin</span>
+      <span class="price-value">Rp 5.000</span>
+    </div>
+
+    <div class="hr-dashed"></div>
+
+    <div class="d-flex justify-content-between align-items-center mb-4">
+      <span class="fw-bold text-main" style="font-size: 1.05rem;">Total Bayar</span>
+      <!-- Tambahkan id="summaryTotal" -->
+      <span class="fw-bold text-navy" style="font-size: 1.25rem;" id="summaryTotal">Rp 125.000</span>
+    </div>
+
+    <button id="btnPesanSekarang" type="button" class="btn btn-navy disabled-look w-100 py-3 rounded-3 fs-6">Pesan Sekarang</button>
+  </div>
+</div>
       </div>
     </div>
 
@@ -568,178 +571,218 @@
     
     <!-- Script untuk Interaksi & Validasi -->
     <script>
-      const btnPesan = document.getElementById('btnPesanSekarang');
-      const requiredInputs = document.querySelectorAll('.required-input');
-      const vaErrorMsg = document.getElementById('vaErrorMsg');
-      const ccInputs = document.querySelectorAll('.cc-input');
-      let isSubmitAttempted = false;
+  const btnPesan = document.getElementById('btnPesanSekarang');
+  const inputNama = document.getElementById('inputNama');
+  const inputPhone = document.getElementById('inputPhone');
+  const inputEmail = document.getElementById('inputEmail');
+  const requiredInputs = document.querySelectorAll('.required-input');
+  const vaErrorMsg = document.getElementById('vaErrorMsg');
+  const ccInputs = document.querySelectorAll('.cc-input');
+  let isSubmitAttempted = false;
 
-      function isValidEmail(email) {
-        const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return re.test(String(email).toLowerCase());
-      }
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(String(email).toLowerCase());
+  }
 
-      function checkFormValidity() {
-        let isDataValid = true;
-        requiredInputs.forEach(input => {
-            const val = input.value.trim();
-            if (val === "") isDataValid = false;
-            if (input.id === 'inputEmail' && val !== "" && !isValidEmail(val)) isDataValid = false;
-        });
-
-        const activeMethod = document.querySelector('.payment-row-card.active');
-        let isMethodValid = false;
-
-        if (activeMethod) {
-            const methodText = activeMethod.querySelector('.header-left-side span').textContent.trim();
-            if (methodText === "Virtual Account") {
-                const selectedBank = activeMethod.querySelector('.bank-item-btn.selected');
-                if (selectedBank) isMethodValid = true;
-            } 
-            else if (methodText === "Kartu Kredit / Debit") {
-                let ccFilled = true;
-                ccInputs.forEach(cc => { if(cc.value.trim() === "") ccFilled = false; });
-                isMethodValid = ccFilled;
-            } 
-            else {
-                isMethodValid = true;
-            }
+  // Cek validitas form secara keseluruhan untuk status tombol
+  function checkFormValidity() {
+    let isDataValid = true;
+    requiredInputs.forEach(input => {
+        const val = input.value.trim();
+        if (val === "" || (input.id === 'inputEmail' && !isValidEmail(val))) {
+            isDataValid = false;
         }
+    });
 
-        if (isDataValid && isMethodValid) {
-            btnPesan.classList.remove('disabled-look');
-            return true;
+    const activeMethod = document.querySelector('.payment-row-card.active');
+    let isMethodValid = false;
+
+    if (activeMethod) {
+        const methodText = activeMethod.querySelector('.header-left-side span').textContent.trim();
+        if (methodText === "Virtual Account") {
+            if (activeMethod.querySelector('.bank-item-btn.selected')) isMethodValid = true;
+        } 
+        else if (methodText === "Kartu Kredit / Debit") {
+            let ccFilled = true;
+            ccInputs.forEach(cc => { if(cc.value.trim() === "") ccFilled = false; });
+            isMethodValid = ccFilled;
+        } 
+        else {
+            isMethodValid = true;
+        }
+    }
+
+    if (isDataValid && isMethodValid) {
+        btnPesan.classList.remove('disabled-look');
+        return true;
+    } else {
+        btnPesan.classList.add('disabled-look');
+        return false;
+    }
+  }
+
+  // Menampilkan indikator error visual (garis merah) pada field yang kosong/salah
+  function showErrors() {
+    requiredInputs.forEach(input => {
+      const val = input.value.trim();
+      const feedbackEl = input.nextElementSibling; 
+      
+      if (val === "") {
+        input.classList.add('is-invalid');
+        if(input.id === 'inputEmail') feedbackEl.textContent = "Email wajib diisi.";
+        else if (input.id === 'inputNama') feedbackEl.textContent = "Nama lengkap wajib diisi.";
+        else if (input.id === 'inputPhone') feedbackEl.textContent = "Nomor handphone wajib diisi.";
+      } else {
+        if (input.id === 'inputEmail' && !isValidEmail(val)) {
+          input.classList.add('is-invalid');
+          feedbackEl.textContent = "Format email tidak valid.";
         } else {
-            btnPesan.classList.add('disabled-look');
-            return false;
+          input.classList.remove('is-invalid');
         }
       }
+    });
 
-      function showErrors() {
-        requiredInputs.forEach(input => {
-          const val = input.value.trim();
-          const feedbackEl = input.nextElementSibling; 
-          
-          if (val === "") {
-            input.classList.add('is-invalid');
-            if(input.id === 'inputEmail') feedbackEl.textContent = "Email wajib diisi.";
-            else if (input.id === 'inputNama') feedbackEl.textContent = "Nama lengkap wajib diisi.";
-            else if (input.id === 'inputPhone') feedbackEl.textContent = "Nomor handphone wajib diisi.";
-          } else {
-            if (input.id === 'inputEmail' && !isValidEmail(val)) {
-              input.classList.add('is-invalid');
-              feedbackEl.textContent = "Format email tidak valid.";
-            } else {
-              input.classList.remove('is-invalid');
-            }
-          }
-        });
+    const activeMethod = document.querySelector('.payment-row-card.active');
+    document.querySelectorAll('.bank-item-btn').forEach(b => b.classList.remove('is-invalid'));
+    if(vaErrorMsg) vaErrorMsg.style.display = 'none';
 
-        const activeMethod = document.querySelector('.payment-row-card.active');
-        document.querySelectorAll('.bank-item-btn').forEach(b => b.classList.remove('is-invalid'));
-        if(vaErrorMsg) vaErrorMsg.style.display = 'none';
-
-        if (activeMethod) {
-            const methodText = activeMethod.querySelector('.header-left-side span').textContent.trim();
-            
-            if (methodText === "Virtual Account") {
-                const selectedBank = activeMethod.querySelector('.bank-item-btn.selected');
-                if (!selectedBank) {
-                    activeMethod.querySelectorAll('.bank-item-btn').forEach(b => b.classList.add('is-invalid'));
-                    if(vaErrorMsg) vaErrorMsg.style.display = 'block';
-                }
-            } 
-            else if (methodText === "Kartu Kredit / Debit") {
-                ccInputs.forEach(cc => {
-                    if (cc.value.trim() === "") {
-                        cc.classList.add('is-invalid');
-                    } else {
-                        cc.classList.remove('is-invalid');
-                    }
-                });
-            }
-        }
-      }
-
-      requiredInputs.forEach(input => {
-        input.addEventListener('input', () => {
-           checkFormValidity();
-           if (isSubmitAttempted) showErrors();
-        });
-      });
-
-      ccInputs.forEach(cc => {
-        cc.addEventListener('input', () => {
-            checkFormValidity();
-            if (isSubmitAttempted) showErrors();
-        });
-      });
-
-      // Event Klik Tombol "Pesan Sekarang"
-      btnPesan.addEventListener('click', function(e) {
-          e.preventDefault();
-          isSubmitAttempted = true; 
-          
-          const isValid = checkFormValidity();
-          
-          if (!isValid) {
-              showErrors(); 
-          } else {
-              // Jika valid, munculkan overlay popout konfirmasi
-              const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
-              confirmModal.show();
-          }
-      });
-
-      // Event Klik Tombol "Ya, Lanjutkan Pembayaran" di dalam overlay popout
-      document.getElementById('btnConfirmPay').addEventListener('click', function() {
-          window.location.href = 'konfirmasi.html'; 
-      });
-
-      function toggleAccordion(cardElement) {
-        const allCards = document.querySelectorAll('.payment-row-card');
+    if (activeMethod) {
+        const methodText = activeMethod.querySelector('.header-left-side span').textContent.trim();
         
-        allCards.forEach(card => {
-            const content = card.querySelector('.payment-row-content');
-            if (card === cardElement) {
-                card.classList.add('active');
-                if(content) {
-                    content.style.maxHeight = content.scrollHeight + "px"; 
-                }
-            } else {
-                card.classList.remove('active');
-                if(content) {
-                    content.style.maxHeight = "0px"; 
-                }
+        if (methodText === "Virtual Account") {
+            const selectedBank = activeMethod.querySelector('.bank-item-btn.selected');
+            if (!selectedBank) {
+                activeMethod.querySelectorAll('.bank-item-btn').forEach(b => b.classList.add('is-invalid'));
+                if(vaErrorMsg) vaErrorMsg.style.display = 'block';
             }
-        });
+        } 
+        else if (methodText === "Kartu Kredit / Debit") {
+            ccInputs.forEach(cc => {
+                if (cc.value.trim() === "") {
+                    cc.classList.add('is-invalid');
+                } else {
+                    cc.classList.remove('is-invalid');
+                }
+            });
+        }
+    }
+  }
 
+  // Event listener saat user mengetik
+  requiredInputs.forEach(input => {
+    input.addEventListener('input', () => {
+       checkFormValidity();
+       if (isSubmitAttempted) showErrors();
+    });
+  });
+
+  ccInputs.forEach(cc => {
+    cc.addEventListener('input', () => {
         checkFormValidity();
         if (isSubmitAttempted) showErrors();
+    });
+  });
+
+  // Tombol "Pesan Sekarang" diklik
+  btnPesan.addEventListener('click', function(e) {
+      e.preventDefault();
+      isSubmitAttempted = true; 
+      
+      if (!checkFormValidity()) {
+          showErrors(); 
+      } else {
+          // Tampilkan modal konfirmasi Bootstrap
+          const confirmModal = new bootstrap.Modal(document.getElementById('confirmModal'));
+          confirmModal.show();
       }
+  });
 
-      function selectBank(bankBtn) {
-        const parentGrid = bankBtn.closest('.bank-options-grid');
-        const allBanks = parentGrid.querySelectorAll('.bank-item-btn');
-        allBanks.forEach(btn => btn.classList.remove('selected'));
-        
-        bankBtn.classList.add('selected');
-        
-        allBanks.forEach(btn => btn.classList.remove('is-invalid'));
-        if(vaErrorMsg) vaErrorMsg.style.display = 'none';
-
-        checkFormValidity();
-        if (isSubmitAttempted) showErrors();
-      }
-
-      window.onload = function() {
-        const activeCard = document.querySelector('.payment-row-card.active');
-        if(activeCard) {
-          const content = activeCard.querySelector('.payment-row-content');
-          if(content) content.style.maxHeight = content.scrollHeight + "px";
+document.getElementById('btnConfirmPay').addEventListener('click', function() {
+    const activeMethod = document.querySelector('.payment-row-card.active');
+    let methodString = "Lainnya";
+    let baseMethod = "";
+    
+    if(activeMethod) {
+        baseMethod = activeMethod.querySelector('.header-left-side span').textContent.trim();
+        if(baseMethod === "Virtual Account") {
+            const bankEl = activeMethod.querySelector('.bank-item-btn.selected .bank-name-label');
+            const bank = bankEl ? bankEl.textContent : '';
+            methodString = `Virtual Account (${bank})`;
+        } else { 
+            methodString = baseMethod; 
         }
-        checkFormValidity();
-      };
+    }
+
+    // Status: Jika Cash -> "Tertunda", selain itu -> "Lunas"
+    let statusString = "Lunas";
+    if (baseMethod.toLowerCase().includes("cash") || baseMethod.toLowerCase().includes("tempat")) {
+        statusString = "Tertunda";
+    }
+
+    const venueEl = document.getElementById('summaryVenue');
+    const dateEl = document.getElementById('summaryDate');
+    const timeEl = document.getElementById('summaryTime');
+    const totalEl = document.getElementById('summaryTotal');
+
+    const orderData = {
+        code: 'VX-' + new Date().getFullYear() + '-' + Math.floor(1000 + Math.random() * 9000),
+        name: inputNama.value.trim(),
+        phone: inputPhone.value.trim(),
+        email: inputEmail.value.trim(),
+        method: methodString,
+        status: statusString, // <-- Menyimpan status "Tertunda"
+        venue: venueEl ? venueEl.textContent : '-',
+        date: dateEl ? dateEl.textContent : '-',
+        time: timeEl ? timeEl.textContent : '-',
+        total: totalEl ? totalEl.textContent : '-'
+    };
+
+    localStorage.setItem('sportSpotOrder', JSON.stringify(orderData));
+    window.location.href = 'konfirmasi.html'; 
+});
+
+  // Fungsi Accordion Metode Pembayaran
+  function toggleAccordion(cardElement) {
+    document.querySelectorAll('.payment-row-card').forEach(card => {
+        const content = card.querySelector('.payment-row-content');
+        if (card === cardElement) {
+            card.classList.add('active');
+            if(content) content.style.maxHeight = content.scrollHeight + "px"; 
+        } else {
+            card.classList.remove('active');
+            if(content) content.style.maxHeight = "0px"; 
+        }
+    });
+
+    checkFormValidity();
+    if (isSubmitAttempted) showErrors();
+  }
+
+  // Fungsi Pilih Bank Virtual Account
+  function selectBank(bankBtn) {
+    const parentGrid = bankBtn.closest('.bank-options-grid');
+    parentGrid.querySelectorAll('.bank-item-btn').forEach(btn => {
+        btn.classList.remove('selected');
+        btn.classList.remove('is-invalid');
+    });
+    
+    bankBtn.classList.add('selected');
+    if(vaErrorMsg) vaErrorMsg.style.display = 'none';
+
+    checkFormValidity();
+    if (isSubmitAttempted) showErrors();
+  }
+
+  // Inisialisasi awal saat halaman dimuat
+  window.onload = function() {
+    const activeCard = document.querySelector('.payment-row-card.active');
+    if(activeCard) {
+      const content = activeCard.querySelector('.payment-row-content');
+      if(content) content.style.maxHeight = content.scrollHeight + "px";
+    }
+    checkFormValidity();
+  };
+</script>
     </script>
   </body>
 </html>
