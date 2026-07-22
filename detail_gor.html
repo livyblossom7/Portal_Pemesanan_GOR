@@ -956,214 +956,221 @@
 
     <!-- ================= SCRIPT: thumbnail sync, kalender, slot jam ================= -->
     <script>
-      (function () {
-        // ---------- THUMBNAIL <-> CAROUSEL SYNC ----------
-        var carouselEl = document.getElementById('gorCarousel');
-        var carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
-        var thumbs = Array.prototype.slice.call(document.querySelectorAll('.thumb-btn'));
+  (function () {
+    // ---------- THUMBNAIL <-> CAROUSEL SYNC ----------
+    var carouselEl = document.getElementById('gorCarousel');
+    var carousel = bootstrap.Carousel.getOrCreateInstance(carouselEl);
+    var thumbs = Array.prototype.slice.call(document.querySelectorAll('.thumb-btn'));
 
-        thumbs.forEach(function (btn) {
+    thumbs.forEach(function (btn) {
+      btn.addEventListener('click', function () {
+        var index = parseInt(btn.dataset.bsSlideTo, 10);
+        carousel.to(index);
+      });
+    });
+
+    carouselEl.addEventListener('slid.bs.carousel', function (e) {
+      thumbs.forEach(function (btn, i) {
+        btn.classList.toggle('active', i === e.to);
+      });
+    });
+
+    // ---------- KALENDER & SLOT JAM ----------
+    var calMonthLabel = document.getElementById('calMonthLabel');
+    var calGrid = document.getElementById('calGrid');
+    var calPrev = document.getElementById('calPrev');
+    var calNext = document.getElementById('calNext');
+    var slotGrid = document.getElementById('slotGrid');
+    var slotHint = document.getElementById('slotHint');
+    var statusTanggal = document.getElementById('statusTanggal');
+    var statusJam = document.getElementById('statusJam');
+    var btnSewa = document.getElementById('btnSewa');
+
+    var namaBulan = [
+      'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
+      'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
+    ];
+
+    var today = new Date();
+    today.setHours(0, 0, 0, 0);
+
+    var viewYear = today.getFullYear();
+    var viewMonth = today.getMonth();
+
+    var selectedDateKey = null; // Format: "2026-08-20"
+    var selectedSlots = [];     // Penampung slot jam
+
+    var bookedSlotsDemo = ['08:00', '14:00', '19:00'];
+    var jamOperasional = [];
+    for (var h = 8; h <= 22; h++) {
+      jamOperasional.push((h < 10 ? '0' + h : h) + ':00');
+    }
+
+    function dateKey(y, m, d) {
+      var mm = (m + 1) < 10 ? '0' + (m + 1) : (m + 1);
+      var dd = d < 10 ? '0' + d : d;
+      return y + '-' + mm + '-' + dd;
+    }
+
+    function renderCalendar() {
+      calMonthLabel.textContent = namaBulan[viewMonth] + ' ' + viewYear;
+      calGrid.innerHTML = '';
+
+      var firstDay = new Date(viewYear, viewMonth, 1);
+      var startOffset = firstDay.getDay(); 
+      var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
+
+      for (var i = 0; i < startOffset; i++) {
+        var blank = document.createElement('span');
+        blank.className = 'cal-cell cal-cell-blank';
+        calGrid.appendChild(blank);
+      }
+
+      for (var d = 1; d <= daysInMonth; d++) {
+        var cellDate = new Date(viewYear, viewMonth, d);
+        var key = dateKey(viewYear, viewMonth, d);
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'cal-cell cal-cell-day';
+        btn.textContent = d;
+        btn.dataset.key = key;
+
+        if (cellDate < today) {
+          btn.classList.add('cal-cell-disabled');
+          btn.disabled = true;
+        } else {
           btn.addEventListener('click', function () {
-            var index = parseInt(btn.dataset.bsSlideTo, 10);
-            carousel.to(index);
-          });
-        });
-
-        carouselEl.addEventListener('slid.bs.carousel', function (e) {
-          thumbs.forEach(function (btn, i) {
-            btn.classList.toggle('active', i === e.to);
-          });
-        });
-
-        // ---------- KALENDER ----------
-        var calMonthLabel = document.getElementById('calMonthLabel');
-        var calGrid = document.getElementById('calGrid');
-        var calPrev = document.getElementById('calPrev');
-        var calNext = document.getElementById('calNext');
-        var slotGrid = document.getElementById('slotGrid');
-        var slotHint = document.getElementById('slotHint');
-        var statusTanggal = document.getElementById('statusTanggal');
-        var statusJam = document.getElementById('statusJam');
-        var btnSewa = document.getElementById('btnSewa');
-
-        var namaBulan = [
-          'Januari', 'Februari', 'Maret', 'April', 'Mei', 'Juni',
-          'Juli', 'Agustus', 'September', 'Oktober', 'November', 'Desember'
-        ];
-        var namaHariPendek = ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'];
-
-        var today = new Date();
-        today.setHours(0, 0, 0, 0);
-
-        var viewYear = today.getFullYear();
-        var viewMonth = today.getMonth();
-
-        var selectedDateKey = null; // format: "2026-08-20"
-        var selectedSlots = [];
-
-        // Contoh data slot yang SUDAH dibooking (placeholder).
-        // Di aplikasi nyata data ini datang dari backend berdasarkan tanggal.
-        var bookedSlotsDemo = ['08:00', '14:00', '19:00'];
-        var jamOperasional = [];
-        for (var h = 6; h <= 22; h++) {
-          jamOperasional.push((h < 10 ? '0' + h : h) + ':00');
-        }
-
-        function dateKey(y, m, d) {
-          var mm = (m + 1) < 10 ? '0' + (m + 1) : (m + 1);
-          var dd = d < 10 ? '0' + d : d;
-          return y + '-' + mm + '-' + dd;
-        }
-
-        function renderCalendar() {
-          calMonthLabel.textContent = namaBulan[viewMonth] + ' ' + viewYear;
-          calGrid.innerHTML = '';
-
-          var firstDay = new Date(viewYear, viewMonth, 1);
-          var startOffset = firstDay.getDay(); // 0 = Minggu
-          var daysInMonth = new Date(viewYear, viewMonth + 1, 0).getDate();
-
-          for (var i = 0; i < startOffset; i++) {
-            var blank = document.createElement('span');
-            blank.className = 'cal-cell cal-cell-blank';
-            calGrid.appendChild(blank);
-          }
-
-          for (var d = 1; d <= daysInMonth; d++) {
-            var cellDate = new Date(viewYear, viewMonth, d);
-            var key = dateKey(viewYear, viewMonth, d);
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'cal-cell cal-cell-day';
-            btn.textContent = d;
-            btn.dataset.key = key;
-
-            if (cellDate < today) {
-              btn.classList.add('cal-cell-disabled');
-              btn.disabled = true;
-            } else {
-              btn.addEventListener('click', function () {
-                selectDate(this.dataset.key, this.textContent);
-              });
-            }
-
-            if (key === selectedDateKey) {
-              btn.classList.add('cal-cell-selected');
-            }
-
-            calGrid.appendChild(btn);
-          }
-        }
-
-        function selectDate(key, dayLabel) {
-          selectedDateKey = key;
-          selectedSlots = [];
-          renderCalendar();
-          renderSlots();
-          updateStatus();
-        }
-
-        function renderSlots() {
-          slotGrid.innerHTML = '';
-
-          if (!selectedDateKey) {
-            slotHint.textContent = 'Pilih tanggal terlebih dahulu di kalender';
-            slotHint.classList.remove('d-none');
-            return;
-          }
-
-          slotHint.classList.add('d-none');
-
-          jamOperasional.forEach(function (jam) {
-            var btn = document.createElement('button');
-            btn.type = 'button';
-            btn.className = 'btn slot-btn';
-            btn.textContent = jam;
-
-            var isBooked = bookedSlotsDemo.indexOf(jam) !== -1;
-            var isSelected = selectedSlots.indexOf(jam) !== -1;
-
-            if (isBooked) {
-              btn.classList.add('slot-booked');
-              btn.disabled = true;
-            } else if (isSelected) {
-              btn.classList.add('slot-selected');
-            } else {
-              btn.classList.add('slot-available');
-            }
-
-            if (!isBooked) {
-              btn.addEventListener('click', function () {
-                toggleSlot(jam);
-              });
-            }
-
-            slotGrid.appendChild(btn);
+            selectDate(this.dataset.key);
           });
         }
 
-        function toggleSlot(jam) {
-          var idx = selectedSlots.indexOf(jam);
-          if (idx === -1) {
-            selectedSlots.push(jam);
-          } else {
-            selectedSlots.splice(idx, 1);
-          }
-          selectedSlots.sort();
-          renderSlots();
-          updateStatus();
+        if (key === selectedDateKey) {
+          btn.classList.add('cal-cell-selected');
         }
 
-        function formatTanggalIndo(key) {
-          var parts = key.split('-');
-          var y = parseInt(parts[0], 10);
-          var m = parseInt(parts[1], 10) - 1;
-          var d = parseInt(parts[2], 10);
-          return d + ' ' + namaBulan[m] + ' ' + y;
+        calGrid.appendChild(btn);
+      }
+    }
+
+    function selectDate(key) {
+      selectedDateKey = key;
+      selectedSlots = []; // Reset jam kalau ganti tanggal
+      renderCalendar();
+      renderSlots();
+      updateStatus();
+    }
+
+    function renderSlots() {
+      slotGrid.innerHTML = '';
+
+      if (!selectedDateKey) {
+        slotHint.textContent = 'Pilih tanggal terlebih dahulu di kalender';
+        slotHint.classList.remove('d-none');
+        return;
+      }
+
+      slotHint.classList.add('d-none');
+
+      jamOperasional.forEach(function (jam) {
+        var btn = document.createElement('button');
+        btn.type = 'button';
+        btn.className = 'btn slot-btn';
+        btn.textContent = jam;
+
+        var isBooked = bookedSlotsDemo.indexOf(jam) !== -1;
+        var isSelected = selectedSlots.indexOf(jam) !== -1;
+
+        if (isBooked) {
+          btn.classList.add('slot-booked');
+          btn.disabled = true;
+        } else if (isSelected) {
+          btn.classList.add('slot-selected');
+        } else {
+          btn.classList.add('slot-available');
         }
 
-        function updateStatus() {
-          if (selectedDateKey) {
-            statusTanggal.textContent = formatTanggalIndo(selectedDateKey);
-            statusTanggal.classList.add('status-value-filled');
-          } else {
-            statusTanggal.textContent = 'Belum ada tanggal dipilih';
-            statusTanggal.classList.remove('status-value-filled');
-          }
-
-          if (selectedSlots.length > 0) {
-            statusJam.textContent = selectedSlots.join(', ');
-            statusJam.classList.add('status-value-filled');
-          } else {
-            statusJam.textContent = 'Belum ada jam dipilih';
-            statusJam.classList.remove('status-value-filled');
-          }
-
-          btnSewa.disabled = !(selectedDateKey && selectedSlots.length > 0);
+        if (!isBooked) {
+          btn.addEventListener('click', function () {
+            toggleSlot(jam);
+          });
         }
 
-        calPrev.addEventListener('click', function () {
-          viewMonth -= 1;
-          if (viewMonth < 0) {
-            viewMonth = 11;
-            viewYear -= 1;
-          }
-          renderCalendar();
+        slotGrid.appendChild(btn);
+      });
+    }
+
+    function toggleSlot(jam) {
+      var idx = selectedSlots.indexOf(jam);
+      if (idx === -1) {
+        selectedSlots.push(jam);
+      } else {
+        selectedSlots.splice(idx, 1);
+      }
+
+      selectedSlots.sort(); // Urutkan jam terawal ke akhir
+      renderSlots();
+      updateStatus();
+    }
+
+    function formatTanggalIndo(key) {
+      var parts = key.split('-');
+      var y = parseInt(parts[0], 10);
+      var m = parseInt(parts[1], 10) - 1;
+      var d = parseInt(parts[2], 10);
+      return d + ' ' + namaBulan[m] + ' ' + y;
+    }
+
+    function updateStatus() {
+      // Status Tanggal
+      if (selectedDateKey) {
+        statusTanggal.textContent = formatTanggalIndo(selectedDateKey);
+        statusTanggal.classList.add('status-value-filled');
+      } else {
+        statusTanggal.textContent = 'Belum ada tanggal dipilih';
+        statusTanggal.classList.remove('status-value-filled');
+      }
+
+      // Status Jam (Format: "10:00 - 11:00, 11:00 - 12:00")
+      if (selectedSlots.length > 0) {
+        var formattedRanges = selectedSlots.map(function (jam) {
+          var startHour = parseInt(jam.split(':')[0], 10);
+          var endHour = startHour + 1;
+          var endSlot = (endHour < 10 ? '0' + endHour : endHour) + ':00';
+          return jam + ' - ' + endSlot;
         });
 
-        calNext.addEventListener('click', function () {
-          viewMonth += 1;
-          if (viewMonth > 11) {
-            viewMonth = 0;
-            viewYear += 1;
-          }
-          renderCalendar();
-        });
+        statusJam.textContent = formattedRanges.join(', ');
+        statusJam.classList.add('status-value-filled');
+      } else {
+        statusJam.textContent = 'Belum ada jam dipilih';
+        statusJam.classList.remove('status-value-filled');
+      }
 
-        renderCalendar();
-        renderSlots();
-        updateStatus();
-      })();
+      btnSewa.disabled = !(selectedDateKey && selectedSlots.length > 0);
+    }
+
+    calPrev.addEventListener('click', function () {
+      viewMonth -= 1;
+      if (viewMonth < 0) {
+        viewMonth = 11;
+        viewYear -= 1;
+      }
+      renderCalendar();
+    });
+
+    calNext.addEventListener('click', function () {
+      viewMonth += 1;
+      if (viewMonth > 11) {
+        viewMonth = 0;
+        viewYear += 1;
+      }
+      renderCalendar();
+    });
+
+    renderCalendar();
+    renderSlots();
+    updateStatus();
+  })();
     </script>
   </body>
 </html>
