@@ -64,6 +64,68 @@
   background: #f8fafc;
 }
 
+/* ===== KOTA (Bootstrap Dropdown, panah animasi buka/tutup) ===== */
+.filter-kota-btn {
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  background: #f8fafc;
+  color: #4b5563;
+  font-size: 0.8rem;
+  padding: 8px 12px;
+}
+.filter-kota-btn:hover,
+.filter-kota-btn:focus,
+.filter-kota-btn:active {
+  background: #f8fafc !important;
+  color: #4b5563 !important;
+  border-color: #e5e7eb !important;
+}
+.filter-kota-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 61, 155, 0.15);
+}
+.filter-kota-btn[aria-expanded="true"] {
+  border-color: var(--primary-dark);
+}
+.filter-kota-btn::after {
+  display: none; /* buang caret bawaan Bootstrap, dipakai chevron custom */
+}
+
+.filter-kota-chevron {
+  width: 8px;
+  height: 8px;
+  margin-top: -3px;
+  border-right: 2px solid #6b7280;
+  border-bottom: 2px solid #6b7280;
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.filter-kota-btn[aria-expanded="true"] .filter-kota-chevron {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+.filter-kota-menu {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  padding: 6px;
+}
+.filter-kota-item {
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #4b5563;
+  padding: 6px 10px;
+}
+.filter-kota-item:hover {
+  background: var(--primary-lightest);
+  color: var(--primary-dark);
+}
+.filter-kota-item.active {
+  background: var(--primary-lightest);
+  color: var(--primary-dark);
+  font-weight: 700;
+}
+
 .form-check-input {
   width: 1.15rem;
   height: 1.15rem;
@@ -111,10 +173,68 @@
   font-weight: 700;
   color: var(--primary-darker);
 }
-.sort-select {
+/* ===== URUTKAN HASIL (Bootstrap Dropdown, panah animasi buka/tutup) ===== */
+.sort-select-btn {
+  border: 1px solid #e5e7eb;
   border-radius: 8px;
-  font-weight: 600;
+  background: var(--white);
   color: var(--primary-dark);
+  font-weight: 600;
+  font-size: 0.875rem;
+  padding: 6px 12px;
+}
+.sort-select-btn:hover,
+.sort-select-btn:focus,
+.sort-select-btn:active {
+  background: var(--white) !important;
+  color: var(--primary-dark) !important;
+  border-color: #e5e7eb !important;
+}
+.sort-select-btn:focus {
+  box-shadow: 0 0 0 0.2rem rgba(0, 61, 155, 0.15);
+}
+.sort-select-btn[aria-expanded="true"] {
+  border-color: var(--primary-dark);
+}
+.sort-select-btn::after {
+  display: none; /* buang caret bawaan Bootstrap, dipakai chevron custom */
+}
+
+.sort-select-chevron {
+  width: 8px;
+  height: 8px;
+  margin-top: -3px;
+  border-right: 2px solid var(--primary-dark);
+  border-bottom: 2px solid var(--primary-dark);
+  transform: rotate(45deg);
+  transition: transform 0.2s ease;
+}
+.sort-select-btn[aria-expanded="true"] .sort-select-chevron {
+  transform: rotate(-135deg);
+  margin-top: 3px;
+}
+
+.sort-select-menu {
+  border-radius: 12px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.08);
+  padding: 6px;
+  min-width: 180px;
+}
+.sort-select-item {
+  border-radius: 8px;
+  font-size: 0.8rem;
+  color: #4b5563;
+  padding: 6px 10px;
+}
+.sort-select-item:hover {
+  background: var(--primary-lightest);
+  color: var(--primary-dark);
+}
+.sort-select-item.active {
+  background: var(--primary-lightest);
+  color: var(--primary-dark);
+  font-weight: 700;
 }
 
 /* ===== RATING BADGE (Bootstrap .badge, override posisi) ===== */

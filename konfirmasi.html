@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SportSpot - Pesanan Dikonfirmasi</title>
+
+    <!-- Bootstrap 5.3.3 -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts: Poppins -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style/index.css" />
+
+    <!-- Custom CSS untuk halaman konfirmasi -->
+    <style>
+      :root {
+        --primary-navy: #003D9B;
+        --primary-navy-hover: #002d72;
+        --bg-body: #F1F3FF;
+        --text-main: #222222;
+        --text-muted: #737373;
+        --border-color: #e4e6eb;
+        --success-color: #00A63E;
+      }
+
+      body {
+        font-family: "Poppins", sans-serif;
+        background-color: var(--bg-body);
+        color: var(--text-main);
+      }
+
+      /* ================= CHECKOUT NAVBAR & BREADCRUMB STYLES ================= */
+      .navbar-custom {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+      }
+      .brand-logo {
+        font-weight: 700;
+        color: var(--primary-navy) !important;
+        text-decoration: none;
+      }
+      .brand-logo:hover {
+        color: var(--primary-navy) !important; 
+      }
+      
+      .step-progress {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+        font-size: 1rem;
+      }
+      .step {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        color: #a0a0a0;
+        transition: all 0.3s ease;
+      }
+      .step.active {
+        color: var(--text-main);
+        font-weight: 600;
+      }
+      .step-num {
+        width: 36px;
+        height: 36px;
+        border: 2px solid #dcdcdc;
+        color: #a0a0a0;
+        border-radius: 50%;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1rem;
+        font-weight: 500;
+        line-height: 1; 
+        transition: all 0.3s ease;
+      }
+      /* Step yang aktif (Biru) */
+      .step.active .step-num {
+        background-color: var(--primary-navy);
+        border-color: var(--primary-navy);
+        color: white;
+      }
+      .step-arrow {
+        font-size: 0.9rem;
+        color: #dcdcdc;
+      }
+      
+      @media (max-width: 768px) {
+        .step-progress { gap: 12px; }
+        .step-text { display: none; }
+        .step-num { width: 30px; height: 30px; font-size: 0.85rem; }
+      }
+
+      /* Global Button Styles */
+      .btn-custom {
+        padding: 14px 24px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        border-radius: 10px;
+        text-decoration: none;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        transition: all 0.3s ease;
+      }
+      .btn-navy {
+        background-color: var(--primary-navy);
+        color: white;
+        border: 1.5px solid var(--primary-navy);
+      }
+      .btn-outline-navy {
+        border: 1.5px solid var(--primary-navy);
+        color: var(--primary-navy);
+        background-color: transparent;
+      }
+
+      /* ================= CONFIRMATION SPECIFIC STYLES ================= */
+      .success-icon-wrap {
+        width: 84px;
+        height: 84px;
+        background-color: #e6f4ea;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0 auto 20px auto;
+      }
+      
+      .order-code-badge {
+        background-color: #e6e9f2;
+        color: var(--primary-navy);
+        font-weight: 700;
+        font-size: 0.9rem;
+        padding: 10px 28px;
+        border-radius: 30px;
+        display: inline-block;
+        letter-spacing: 0.5px;
+      }
+
+      .confirmation-box {
+        max-width: 480px; 
+        margin: 0 auto;
+      }
+
+      .detail-card {
+        background-color: #ffffff;
+        border-radius: 14px;
+        padding: 28px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.03);
+      }
+
+      .detail-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 14px 0;
+        font-size: 0.85rem;
+        border-bottom: 1px solid var(--border-color);
+      }
+      .detail-row:last-of-type {
+        border-bottom: none;
+      }
+      .detail-label {
+        color: var(--text-muted);
+        font-weight: 500;
+      }
+      .detail-value {
+        font-weight: 600;
+        color: var(--text-main);
+        text-align: right;
+      }
+
+    </style>
+  </head>
+  <body>
+
+    <!-- ================= NAVBAR ================= -->
+    <nav class="navbar navbar-light bg-white navbar-custom border-bottom sticky-top">
+      <div class="container d-flex justify-content-between align-items-center">
+        
+        <!-- Brand Logo Kiri -->
+        <a class="navbar-brand brand-logo d-flex align-items-center gap-2 mb-0" href="/beranda.html">
+          <img src="/img/icon/Basketball.svg" alt="logo" />
+          SportSpot
+        </a>
+
+        <!-- Breadcrumb / Step Progress Kanan -->
+        <div class="step-progress">
+          <!-- Step 1 aktif (biru) -->
+          <div class="step active">
+            <span class="step-num">1</span> 
+            <span class="step-text">Pemesanan & Pembayaran</span>
+          </div>
+          <span class="step-arrow">❯</span>
+          <!-- Step 2 aktif (biru) karena sudah di halaman Selesai -->
+          <div class="step active">
+            <span class="step-num">2</span> 
+            <span class="step-text">Selesai</span>
+          </div>
+        </div>
+        
+      </div>
+    </nav>
+
+    <!-- ================= MAIN CONTENT ================= -->
+    <div class="container py-5 mt-3">
+      <div class="confirmation-box text-center">
+        
+        <!-- Ikon Sukses -->
+        <div class="success-icon-wrap">
+          <svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" fill="var(--success-color)" class="bi bi-check-circle" viewBox="0 0 16 16">
+            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14m0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16"/>
+            <path d="m10.97 4.97-.02.022-3.473 4.425-2.093-2.094a.75.75 0 0 0-1.06 1.06L6.97 11.03a.75.75 0 0 0 1.079-.02l3.992-4.99a.75.75 0 0 0-1.071-1.05"/>
+          </svg>
+        </div>
+
+        <h2 class="fw-bold mb-2" style="font-size: 1.8rem; letter-spacing: -0.5px;">Pesanan Dikonfirmasi</h2>
+        <p class="text-muted small mb-4">Email konfirmasi telah dikirimkan ke alamat email Anda.</p>
+
+        <!-- Kode Pesanan -->
+        <div class="mb-4">
+          <div class="order-code-badge">VX-2025-4147</div>
+        </div>
+
+        <!-- Detail Order Card -->
+        <div class="detail-card text-start mb-4">
+          <h6 class="fw-bold mb-1" style="font-size: 1rem;">Detail Order</h6>
+          
+          <div class="detail-row">
+            <span class="detail-label">Venue</span>
+            <span class="detail-value">GOR Kebon Jeruk</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Tanggal</span>
+            <span class="detail-value">Sabtu, 26 Juli 2025</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Waktu</span>
+            <span class="detail-value">09:00 - 10:00</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Pemesan</span>
+            <span class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">No. HP</span>
+            <span class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Email</span>
+            <span class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Metode</span>
+            <span class="detail-value">-</span>
+          </div>
+          <div class="detail-row">
+            <span class="detail-label">Status</span>
+            <span class="detail-value">-</span>
+          </div>
+
+          <div class="hr-solid"></div>
+
+          <div class="d-flex justify-content-between align-items-center mt-2">
+            <span class="fw-bold text-main" style="font-size: 1rem;">Total Bayar</span>
+            <span class="fw-bold text-navy" style="font-size: 1.15rem; color:#003D9B;">Rp 120.000</span>
+          </div>
+        </div>
+
+        <!-- Tombol Aksi -->
+        <div class="d-flex flex-column flex-sm-row gap-3 mt-4">
+          <a href="#" class="btn-custom btn-outline-navy flex-grow-1" onclick="alert('Membuka detail pesanan...')">Lihat Detail Pesanan</a>
+          <a href="/beranda.html" class="btn-custom btn-navy flex-grow-1">Kembali Ke Beranda</a>
+        </div>
+
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>
