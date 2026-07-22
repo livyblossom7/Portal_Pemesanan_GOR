@@ -1,0 +1,710 @@
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SportSpot - Cari Lapangan</title>
+
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="./style/index.css" />
+    <link rel="stylesheet" href="./style/cari_lapangan.css" />
+  </head>
+  <body>
+    <nav
+      class="navbar navbar-expand-lg navbar-light bg-white navbar-custom py-3 border-bottom"
+    >
+      <div class="container">
+        <a
+          class="navbar-brand brand-logo d-flex align-items-center gap-2"
+          href="#"
+        >
+          <img src="/img/icon/Basketball.svg" alt="logo" />
+          SportSpot
+        </a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navMenu"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navMenu">
+          <ul class="navbar-nav mx-auto gap-lg-4">
+            <li class="nav-item">
+              <a class="nav-link" href="/beranda.html">Beranda</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link active" href="#">Cari Lapangan</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="/about_us.html">Tentang</a>
+            </li>
+          </ul>
+          <div class="d-flex gap-2 mt-3 mt-lg-0">
+            <button class="btn btn-outline-primary px-3">Masuk</button>
+            <button class="btn btn-navy px-3">Daftar</button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <!-- ================= CARI LAPANGAN ================= -->
+    <section class="cari-page py-5">
+      <div class="container">
+        <!-- search bar (reuse .search-card dari beranda.css, max-width via class .search-wrap, bukan inline style) -->
+        <div class="search-wrap mx-auto mb-5">
+          <label for="searchInput" class="search-caption d-block mb-2 fw-semibold small">
+            Cari Lapangan GOR
+          </label>
+          <div class="search-card">
+            <div class="row g-2 align-items-center">
+              <div class="col">
+                <div class="input-group">
+                  <span class="input-group-text bg-white border-0">
+                    <img src="/img/icon/Icon.svg" alt="cari" />
+                  </span>
+                  <input
+                    type="text"
+                    id="searchInput"
+                    class="form-control border-0"
+                    placeholder="Cari nama lapangan GOR"
+                  />
+                </div>
+              </div>
+              <div class="col-auto">
+                <button id="searchBtn" type="button" class="btn btn-navy btn-search" aria-label="Cari lapangan">Cari</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="row g-4">
+          <!-- ================= FILTER SIDEBAR ================= -->
+          <div class="col-lg-3">
+            <div class="card border rounded-4 shadow-sm">
+              <div class="card-body p-4">
+                <div class="d-flex justify-content-between align-items-center mb-3">
+                  <h2 class="filter-title h6 mb-0">Filter</h2>
+                  <button id="filterReset" class="btn btn-link btn-sm p-0 fw-semibold text-decoration-none filter-reset">
+                    Reset
+                  </button>
+                </div>
+
+                <!-- KOTA -->
+                <div class="mb-3">
+                  <label for="filterKota" class="form-label fw-bold small filter-section-title">Kota</label>
+                  <select id="filterKota" class="form-select form-select-sm">
+                    <option>Semua Kota</option>
+                    <option>Jakarta Barat</option>
+                    <option>Bekasi</option>
+                    <option>Tangerang</option>
+                    <option>Salatiga</option>
+                  </select>
+                </div>
+
+                <hr class="filter-divider" />
+
+                <!-- JENIS OLAHRAGA -->
+                <div class="mb-3">
+                  <h3 class="fw-bold small filter-section-title mb-3">Jenis Olahraga</h3>
+                  <div class="row row-cols-2 g-2">
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-olahraga" type="checkbox" value="Badminton" id="olahraga-badminton" />
+                        <label class="form-check-label small" for="olahraga-badminton">Badminton</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-olahraga" type="checkbox" value="Futsal" id="olahraga-futsal" />
+                        <label class="form-check-label small" for="olahraga-futsal">Futsal</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-olahraga" type="checkbox" value="Basket" id="olahraga-basket" />
+                        <label class="form-check-label small" for="olahraga-basket">Basket</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-olahraga" type="checkbox" value="Tenis" id="olahraga-tenis" />
+                        <label class="form-check-label small" for="olahraga-tenis">Tenis</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-olahraga" type="checkbox" value="Voli" id="olahraga-voli" />
+                        <label class="form-check-label small" for="olahraga-voli">Voli</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-olahraga" type="checkbox" value="Tenis Meja" id="olahraga-tenismeja" />
+                        <label class="form-check-label small" for="olahraga-tenismeja">Tenis Meja</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-olahraga" type="checkbox" value="Lari" id="olahraga-lari" />
+                        <label class="form-check-label small" for="olahraga-lari">Lari</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="filter-divider" />
+
+                <!-- RENTANG HARGA (single-select, sama kayak Rating) -->
+                <div class="mb-3">
+                  <h3 class="fw-bold small filter-section-title mb-3">Rentang Harga</h3>
+                  <div class="row row-cols-2 g-2">
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-semua" data-min="0" data-max="999999999" autocomplete="off" checked />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-semua">Semua Harga</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-50" data-min="0" data-max="49999" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-50">&lt; Rp 50rb</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-50-100" data-min="50000" data-max="99999" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-50-100">Rp 50rb - 100rb</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-100-200" data-min="100000" data-max="199999" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-100-200">Rp 100rb - 200rb</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-harga" name="harga" id="harga-200" data-min="200000" data-max="999999999" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="harga-200">&gt; Rp 200rb</label>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="filter-divider" />
+
+                <!-- RATING (single-select, format rentang) -->
+                <div class="mb-3">
+                  <h3 class="fw-bold small filter-section-title mb-3">Rating</h3>
+                  <div class="row row-cols-2 g-2">
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-semua" data-min="0" data-max="5" autocomplete="off" checked />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-semua">Semua Rating</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-45" data-min="4.5" data-max="5" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-45">4.5 - 5.0 &#9733;</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-40" data-min="4.0" data-max="4.49" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-40">4.0 - 4.5 &#9733;</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-35" data-min="3.5" data-max="3.99" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-35">3.5 - 4.0 &#9733;</label>
+                    </div>
+                    <div class="col">
+                      <input type="radio" class="btn-check filter-rating" name="rating" id="rating-30" data-min="3.0" data-max="3.49" autocomplete="off" />
+                      <label class="btn btn-outline-primary btn-sm w-100 filter-toggle-btn" for="rating-30">3.0 - 3.5 &#9733;</label>
+                    </div>
+                  </div>
+                </div>
+
+                <hr class="filter-divider" />
+
+                <!-- FASILITAS (multi-select, AND: lapangan harus punya semua yang dicentang) -->
+                <div>
+                  <h3 class="fw-bold small filter-section-title mb-3">Fasilitas</h3>
+                  <div class="row row-cols-2 g-2">
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-fasilitas" type="checkbox" value="parkir" id="fasilitas-parkir" />
+                        <label class="form-check-label small" for="fasilitas-parkir">Parkir Luas</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-fasilitas" type="checkbox" value="kantin" id="fasilitas-kantin" />
+                        <label class="form-check-label small" for="fasilitas-kantin">Kantin</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-fasilitas" type="checkbox" value="ruang-ganti" id="fasilitas-ruangganti" />
+                        <label class="form-check-label small" for="fasilitas-ruangganti">Ruang Ganti</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-fasilitas" type="checkbox" value="wifi" id="fasilitas-wifi" />
+                        <label class="form-check-label small" for="fasilitas-wifi">Wi-Fi</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-fasilitas" type="checkbox" value="mushola" id="fasilitas-mushola" />
+                        <label class="form-check-label small" for="fasilitas-mushola">Mushola</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-fasilitas" type="checkbox" value="ac" id="fasilitas-ac" />
+                        <label class="form-check-label small" for="fasilitas-ac">AC</label>
+                      </div>
+                    </div>
+                    <div class="col">
+                      <div class="form-check">
+                        <input class="form-check-input filter-fasilitas" type="checkbox" value="toilet" id="fasilitas-toilet" />
+                        <label class="form-check-label small" for="fasilitas-toilet">Toilet</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- ================= RESULTS ================= -->
+          <div class="col-lg-9">
+            <div class="d-flex justify-content-between align-items-center mb-4">
+              <h1 id="resultsCount" class="results-title h5 mb-0">
+                Menampilkan 4 Lapangan ditemukan
+              </h1>
+              <div class="d-flex align-items-center gap-2">
+                <label for="sortSelect" class="text-muted small mb-0">Urutkan Hasil:</label>
+                <select id="sortSelect" class="form-select form-select-sm sort-select w-auto">
+                  <option>Terpopuler</option>
+                  <option>Harga Terendah</option>
+                  <option>Harga Tertinggi</option>
+                  <option>Rating Tertinggi</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- ================= NO RESULTS (Bootstrap Alert - komponen Umpan Balik) ================= -->
+            <div id="noResults" class="alert alert-light border text-center d-none" role="alert">
+              Tidak ada lapangan yang cocok dengan filter kamu. Coba ubah kriteria pencarian.
+            </div>
+
+            <!--
+              CATATAN UNTUK GANTI DATA GOR:
+              Setiap card dibungkus .gor-card-item dengan atribut data-* di bawah ini,
+              itu yang dibaca oleh script filter/sort/search di bagian akhir halaman.
+              Saat mengganti data GOR asli, pastikan atribut ini ikut disesuaikan:
+                data-nama        -> nama GOR (dipakai untuk pencarian)
+                data-kota        -> harus SAMA PERSIS dengan salah satu <option> di filter Kota
+                data-olahraga    -> salah satu dari: Badminton, Futsal, Basket, Tenis, Voli, Tenis Meja, Lari
+                data-harga       -> angka saja, tanpa titik/Rp (contoh: 75000)
+                data-rating      -> angka desimal (contoh: 4.8)
+                data-fasilitas   -> gabungan value fasilitas dipisah koma, value harus sama dengan
+                                     value checkbox Fasilitas (parkir, kantin, ruang-ganti, wifi, mushola, ac, toilet)
+                data-popularitas -> angka urutan default untuk sort "Terpopuler" (semakin kecil, semakin depan)
+            -->
+            <div id="resultsGrid" class="row g-4">
+              <!-- card 1 -->
+              <div class="col-md-6 gor-card-item"
+                data-nama="GOR Kebon Jeruk"
+                data-kota="Jakarta Barat"
+                data-olahraga="Badminton"
+                data-harga="75000"
+                data-rating="4.8"
+                data-fasilitas="parkir,kantin,wifi"
+                data-popularitas="1">
+                <div class="gor-card h-100 d-flex flex-column">
+                  <div class="position-relative">
+                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                      <img src="/img/icon/star.svg" alt="bintang" />
+                      4.8
+                    </span>
+                    <img src="/img/gor.jpg" alt="gor" />
+                  </div>
+                  <div class="p-3 flex-grow-1 d-flex flex-column">
+                    <h5 class="gor-title mb-1">GOR Kebon Jeruk</h5>
+                    <p class="gor-location mb-2">
+                      <img src="/img/icon/Icon.svg" alt="lokasi" />
+                      Jakarta Barat, DKI Jakarta
+                    </p>
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <div>
+                        <div class="gor-price-label">Mulai</div>
+                        <div class="gor-price">
+                          Rp 75.000<span class="fw-normal fs-6">/jam</span>
+                        </div>
+                      </div>
+                      <a href="/detail_gor.html">
+                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- card 2 -->
+              <div class="col-md-6 gor-card-item"
+                data-nama="Champions Futsal"
+                data-kota="Bekasi"
+                data-olahraga="Futsal"
+                data-harga="65000"
+                data-rating="4.7"
+                data-fasilitas="parkir,kantin,toilet"
+                data-popularitas="2">
+                <div class="gor-card h-100 d-flex flex-column">
+                  <div class="position-relative">
+                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                      <img src="/img/icon/star.svg" alt="bintang" />
+                      4.7
+                    </span>
+                    <img src="/img/gor.jpg" alt="gor" />
+                  </div>
+                  <div class="p-3 flex-grow-1 d-flex flex-column">
+                    <h5 class="gor-title mb-1">Champions Futsal</h5>
+                    <p class="gor-location mb-2">
+                      <img src="/img/icon/Icon.svg" alt="lokasi" />
+                      Bekasi Selatan, Bekasi
+                    </p>
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <div>
+                        <div class="gor-price-label">Mulai</div>
+                        <div class="gor-price">
+                          Rp 65.000<span class="fw-normal fs-6">/jam</span>
+                        </div>
+                      </div>
+                      <a href="/detail_gor.html">
+                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- card 3 -->
+              <div class="col-md-6 gor-card-item"
+                data-nama="Arena Sport Hall"
+                data-kota="Tangerang"
+                data-olahraga="Basket"
+                data-harga="120000"
+                data-rating="4.9"
+                data-fasilitas="parkir,ruang-ganti,ac"
+                data-popularitas="3">
+                <div class="gor-card h-100 d-flex flex-column">
+                  <div class="position-relative">
+                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                      <img src="/img/icon/star.svg" alt="bintang" />
+                      4.9
+                    </span>
+                    <img src="/img/gor.jpg" alt="gor" />
+                  </div>
+                  <div class="p-3 flex-grow-1 d-flex flex-column">
+                    <h5 class="gor-title mb-1">Arena Sport Hall</h5>
+                    <p class="gor-location mb-2">
+                      <img src="/img/icon/Icon.svg" alt="lokasi" />
+                      Gading Serpong, Tangerang
+                    </p>
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <div>
+                        <div class="gor-price-label">Mulai</div>
+                        <div class="gor-price">
+                          Rp 120.000<span class="fw-normal fs-6">/jam</span>
+                        </div>
+                      </div>
+                      <a href="/detail_gor.html">
+                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- card 4 -->
+              <div class="col-md-6 gor-card-item"
+                data-nama="Tennis Indoor Kridanggo"
+                data-kota="Salatiga"
+                data-olahraga="Tenis"
+                data-harga="80000"
+                data-rating="4.5"
+                data-fasilitas="parkir,wifi,toilet"
+                data-popularitas="4">
+                <div class="gor-card h-100 d-flex flex-column">
+                  <div class="position-relative">
+                    <span class="badge rounded-pill bg-white text-dark border rating-badge">
+                      <img src="/img/icon/star.svg" alt="bintang" />
+                      4.5
+                    </span>
+                    <img src="/img/gor.jpg" alt="gor" />
+                  </div>
+                  <div class="p-3 flex-grow-1 d-flex flex-column">
+                    <h5 class="gor-title mb-1">Tennis Indoor Kridanggo</h5>
+                    <p class="gor-location mb-2">
+                      <img src="/img/icon/Icon.svg" alt="lokasi" />
+                      Sidomukti, Salatiga
+                    </p>
+                    <hr />
+                    <div class="d-flex justify-content-between align-items-center mt-auto">
+                      <div>
+                        <div class="gor-price-label">Mulai</div>
+                        <div class="gor-price">
+                          Rp 80.000<span class="fw-normal fs-6">/jam</span>
+                        </div>
+                      </div>
+                      <a href="/detail_gor.html">
+                        <button class="btn btn-pesan px-3 py-2">Pesan Sekarang</button>
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ================= PAGINATION (native Bootstrap, tampilan saja - lihat catatan di chat) ================= -->
+            <nav aria-label="Pagination" class="mt-5">
+              <ul class="pagination justify-content-center gap-2 mb-0">
+                <li class="page-item">
+                  <a class="page-link rounded-3" href="#">&lsaquo;</a>
+                </li>
+                <li class="page-item active">
+                  <a class="page-link rounded-3" href="#">1</a>
+                </li>
+                <li class="page-item">
+                  <a class="page-link rounded-3" href="#">&rsaquo;</a>
+                </li>
+              </ul>
+            </nav>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ================= FOOTER ================= -->
+    <footer class="pt-5">
+      <div class="container">
+        <div class="d-flex flex-row justify-content-between g-4 pb-4">
+          <div class="col-md-4">
+            <div class="footer-brand mb-3 fs-5">
+              <img src="img/icon/Basketball-putih.svg" alt="logo" />
+              SportSpot
+            </div>
+            <p class="mb-3">
+              Platform booking lapangan olahraga #1 di Indonesia. Kami membantu
+              atlet dan komunitas olahraga menemukan tempat terbaik untuk
+              berlatih.
+            </p>
+            <div class="d-flex gap-2">
+              <a href="#" class="footer-social">
+                <img src="img/icon/Facebook.svg" alt="fb" />
+              </a>
+              <a href="#" class="footer-social">
+                <img src="img/icon/insta.svg" alt="insta" />
+              </a>
+              <a href="#" class="footer-social">
+                <img src="img/icon/Twitter.svg" alt="twitter" />
+              </a>
+            </div>
+          </div>
+
+          <div class="col-md-2 col-6">
+            <h6 class="mb-3">JELAJAHI</h6>
+            <ul class="list-unstyled d-flex flex-column gap-2">
+              <li><a href="#">Cari Lapangan</a></li>
+              <li><a href="#">Promo Terbaru</a></li>
+              <li><a href="#">Kategori Olahraga</a></li>
+              <li><a href="#">Artikel Olahraga</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-6">
+            <h6 class="mb-3">PERUSAHAAN</h6>
+            <ul class="list-unstyled d-flex flex-column gap-2">
+              <li><a href="#">Tentang Kami</a></li>
+              <li><a href="#">Karir</a></li>
+              <li><a href="#">Blog</a></li>
+              <li><a href="#">Hubungi Kami</a></li>
+            </ul>
+          </div>
+
+          <div class="col-md-2 col-6">
+            <h6 class="mb-3">DUKUNGAN</h6>
+            <ul class="list-unstyled d-flex flex-column gap-2">
+              <li><a href="#">Pusat Bantuan</a></li>
+              <li><a href="#">Syarat & Ketentuan</a></li>
+              <li><a href="#">Kebijakan Privasi</a></li>
+              <li><a href="#">FAQ</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div
+          class="footer-bottom d-flex flex-column flex-md-row justify-content-between align-items-center py-3 gap-2"
+        >
+          <span>© 2026 SportSpot. Seluruh hak cipta dilindungi.</span>
+          <div class="d-flex gap-4">
+            <a href="#">Kebijakan Privasi</a>
+            <a href="#">Syarat & Ketentuan</a>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- ================= SCRIPT: search, filter, sort ================= -->
+    <script>
+      (function () {
+        var grid = document.getElementById('resultsGrid');
+        var searchInput = document.getElementById('searchInput');
+        var searchBtn = document.getElementById('searchBtn');
+        var kotaSelect = document.getElementById('filterKota');
+        var sortSelect = document.getElementById('sortSelect');
+        var resultsCount = document.getElementById('resultsCount');
+        var noResults = document.getElementById('noResults');
+        var resetBtn = document.getElementById('filterReset');
+
+        function cards() {
+          return Array.prototype.slice.call(grid.querySelectorAll('.gor-card-item'));
+        }
+
+        function checkedValues(selector) {
+          return Array.prototype.slice
+            .call(document.querySelectorAll(selector))
+            .map(function (el) { return el.value; });
+        }
+
+        function checkedRangeEls(selector) {
+          return Array.prototype.slice.call(document.querySelectorAll(selector));
+        }
+
+        function matchesFilters(card) {
+          var nama = (card.dataset.nama || '').toLowerCase();
+          var kota = card.dataset.kota || '';
+          var olahraga = card.dataset.olahraga || '';
+          var harga = parseInt(card.dataset.harga, 10) || 0;
+          var rating = parseFloat(card.dataset.rating) || 0;
+          var fasilitasList = (card.dataset.fasilitas || '')
+            .split(',')
+            .map(function (f) { return f.trim(); })
+            .filter(Boolean);
+
+          var q = searchInput.value.trim().toLowerCase();
+          if (q && nama.indexOf(q) === -1 && kota.toLowerCase().indexOf(q) === -1) {
+            return false;
+          }
+
+          var kotaVal = kotaSelect.value;
+          if (kotaVal !== 'Semua Kota' && kotaVal !== kota) return false;
+
+          var sports = checkedValues('.filter-olahraga:checked');
+          if (sports.length > 0 && sports.indexOf(olahraga) === -1) return false;
+
+          var priceEls = checkedRangeEls('.filter-harga:checked');
+          if (priceEls.length > 0) {
+            var inRange = priceEls.some(function (el) {
+              var min = parseInt(el.dataset.min, 10);
+              var max = parseInt(el.dataset.max, 10);
+              return harga >= min && harga <= max;
+            });
+            if (!inRange) return false;
+          }
+
+          var ratingEl = document.querySelector('.filter-rating:checked');
+          if (ratingEl) {
+            var rmin = parseFloat(ratingEl.dataset.min);
+            var rmax = parseFloat(ratingEl.dataset.max);
+            if (rating < rmin || rating > rmax) return false;
+          }
+
+          var facilities = checkedValues('.filter-fasilitas:checked');
+          if (facilities.length > 0) {
+            var hasAll = facilities.every(function (f) {
+              return fasilitasList.indexOf(f) !== -1;
+            });
+            if (!hasAll) return false;
+          }
+
+          return true;
+        }
+
+        function applyFilters() {
+          var visibleCount = 0;
+          cards().forEach(function (card) {
+            var show = matchesFilters(card);
+            card.classList.toggle('d-none', !show);
+            if (show) visibleCount++;
+          });
+
+          if (visibleCount === 0) {
+            resultsCount.textContent = 'Tidak ada lapangan ditemukan';
+            noResults.classList.remove('d-none');
+          } else {
+            resultsCount.textContent =
+              'Menampilkan ' + visibleCount + ' Lapangan ditemukan';
+            noResults.classList.add('d-none');
+          }
+        }
+
+        function applySort() {
+          var mode = sortSelect.value;
+          var items = cards();
+          items.sort(function (a, b) {
+            if (mode === 'Harga Terendah') {
+              return parseInt(a.dataset.harga, 10) - parseInt(b.dataset.harga, 10);
+            }
+            if (mode === 'Harga Tertinggi') {
+              return parseInt(b.dataset.harga, 10) - parseInt(a.dataset.harga, 10);
+            }
+            if (mode === 'Rating Tertinggi') {
+              return parseFloat(b.dataset.rating) - parseFloat(a.dataset.rating);
+            }
+            return parseInt(a.dataset.popularitas, 10) - parseInt(b.dataset.popularitas, 10);
+          });
+          items.forEach(function (item) { grid.appendChild(item); });
+        }
+
+        searchBtn.addEventListener('click', applyFilters);
+        searchInput.addEventListener('keydown', function (e) {
+          if (e.key === 'Enter') {
+            e.preventDefault();
+            applyFilters();
+          }
+        });
+        kotaSelect.addEventListener('change', applyFilters);
+        document
+          .querySelectorAll('.filter-olahraga, .filter-harga, .filter-rating, .filter-fasilitas')
+          .forEach(function (el) { el.addEventListener('change', applyFilters); });
+        sortSelect.addEventListener('change', function () {
+          applySort();
+          applyFilters();
+        });
+
+        resetBtn.addEventListener('click', function (e) {
+          e.preventDefault();
+          searchInput.value = '';
+          kotaSelect.value = 'Semua Kota';
+          document
+            .querySelectorAll('.filter-olahraga, .filter-fasilitas')
+            .forEach(function (el) { el.checked = false; });
+          document.getElementById('harga-semua').checked = true;
+          document.getElementById('rating-semua').checked = true;
+          sortSelect.value = 'Terpopuler';
+          applySort();
+          applyFilters();
+        });
+
+        applySort();
+        applyFilters();
+      })();
+    </script>
+  </body>
+</html>
